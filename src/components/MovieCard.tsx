@@ -1,0 +1,63 @@
+import { Link } from 'react-router-dom'
+import { MovieItem } from '~/types/movie/movie-types'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import 'react-lazy-load-image-component/src/effects/blur.css'
+import CircularRating from '~/components/CircularRating'
+import { APP_DOMAIN_CDN_IMAGE } from '~/constant/constant'
+
+const MovieCard = ({ media }: { media: MovieItem }) => {
+  const {
+    _id,
+    poster_url,
+    thumb_url,
+    origin_name,
+    name,
+    lang,
+    quality,
+    tmdb: { type, vote_average }
+  } = media
+  return (
+    <Link
+      className='relative overflow-hidden flex flex-col rounded-lg bg-[#212529] shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl h-[350px]'
+      to={`/${type === 'movie' ? 'movie' : 'tv'}/${_id}`}
+    >
+      <div className='aspect-[2/3] overflow-hidden'>
+        <LazyLoadImage
+          className='h-full w-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-110'
+          src={
+            poster_url
+              ? `${APP_DOMAIN_CDN_IMAGE}/uploads/movies/${thumb_url}`
+              : 'https://via.placeholder.com/500x750?text=No+Image'
+          }
+          alt={name}
+          effect='blur'
+          wrapperProps={{
+            style: { transitionDelay: '0.5s' }
+          }}
+        />
+      </div>
+      <div className='px-4 py-2 text-center'>
+        <p className='truncate text-base font-normal text-orange-500 mb-1'>{origin_name}</p>
+        <p className='truncate text-sm font-light text-slate-300'>{name}</p>
+      </div>
+      <div className='absolute right-2 top-2 h-10 w-10 rounded-full bg-black/50 p-0.5'>
+        <CircularRating vote_average={vote_average} />
+      </div>
+      <div className='absolute left-2 top-2'>
+        <span className='rounded-tl-md rounded-br-md rounded-tr bg-gradient-to-r from-pink-500 to-purple-700 px-2 py-1 text-xs text-white shadow-lg'>
+          <span className='relative z-10'>
+            {quality}+{lang}
+          </span>
+          <span className='absolute inset-0 rounded-tl-md rounded-br-md rounded-tr bg-gradient-to-r from-pink-500 to-purple-700 opacity-50 blur'></span>
+        </span>
+      </div>
+      {/* {type === 'tv' && (
+        <div className='absolute right-2 top-2'>
+          <span className='rounded-full bg-indigo-600 px-2 py-1 text-xs font-medium text-white'>TV</span>
+        </div>
+      )} */}
+    </Link>
+  )
+}
+
+export default MovieCard
