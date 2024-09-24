@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 // import SearchBar from './SearchBar/SearchBar'
 
 const NavLink = ({ to, children }: { to: string; children: React.ReactNode }) => (
-  <Link to={to} className='transition-colors hover:text-red-500 duration-300'>
+  <Link to={to} className='transition-colors hover:text-[#ff5d5d] duration-300'>
     {children}
   </Link>
 )
@@ -41,8 +41,10 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 z-50 w-full transition-all duration-300 bg-black ${
-        isScrolled ? 'bg-[#141414]/90 backdrop-blur-sm' : 'bg-gradient-to-b from-black/70 to-transparent'
+      className={`fixed top-0 z-50 w-full transition-all duration-300 bg-[#121a2b] shadow-lg ${
+        isScrolled
+          ? 'bg-[#141414]/90 backdrop-blur-sm bg-gradient-to-r from-black/70 to-transparent'
+          : 'bg-gradient-to-r from-black/70 to-transparent'
       }`}
     >
       <div className='mx-auto flex h-20 max-w-full items-center justify-between px-6 sm:px-8 lg:px-12 '>

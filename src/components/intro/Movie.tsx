@@ -45,7 +45,7 @@ const MovieInfo = ({ item, data }: { item: MovieItem } & { data: MovieItem }) =>
         <FontAwesomeIcon icon={faCalendar} className='mr-1' /> {item.year}
         <FontAwesomeIcon icon={faClock} className='mr-1' /> {formatDuration(item.time)}
         <div className='relative h-12 w-12'>
-          <CircularRating vote_average={data.tmdb?.vote_average} />
+          {data.tmdb?.vote_average > 0 && <CircularRating vote_average={data.tmdb?.vote_average} />}
         </div>
       </span>
     </div>

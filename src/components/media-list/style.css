@@ -1,0 +1,23 @@
+.swiper-button-next,
+.swiper-button-prev {
+  padding: 20px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f79925, #f72c70);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: linear-gradient(135deg, #FFA500, #f8429d);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 16px;
+  font-weight: 600;
+}

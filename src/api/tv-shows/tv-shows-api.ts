@@ -1,8 +1,8 @@
 import axiosApi from '~/api/axiosApi'
 import { MovieData } from '~/types/movie/movie-types'
 
-const movieApi = {
-  getMovieList: async (params: {
+const tvShowsApi = {
+  getTvShowsList: async (params: {
     type: string
     category?: string
     country?: string
@@ -19,9 +19,9 @@ const movieApi = {
       page: page.toString()
     }).toString()
 
-    const { data } = await axiosApi.get<MovieData>(`/danh-sach/phim-${type}?${queryParams}`)
+    const { data } = await axiosApi.get<MovieData>(`/danh-sach/${type}?${queryParams}`)
     return data || {}
   }
 }
 
-export default movieApi
+export default tvShowsApi

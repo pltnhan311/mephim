@@ -1,5 +1,5 @@
 const movieKeys = {
-  movieList: (type: string) => ['movieList', type]
+  movieList: (type: string, sort_field?: string) => ['movieList', type, sort_field]
   // movie: (slug: string) => ['movie', slug] as const
 }
 

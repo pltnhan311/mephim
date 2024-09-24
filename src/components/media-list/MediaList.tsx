@@ -2,14 +2,33 @@ import { useMemo } from 'react'
 import { useMovies } from '~/api/movie/use-movies'
 import MovieCard from '~/components/MovieCard'
 import { MovieItem } from '~/types/movie/movie-types'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Pagination } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import './style.css'
+import { useTvShows } from '~/api/tv-shows/use-tv-shows'
+import MovieCardSkeleton from '~/components/MovieCardSkeleton'
 
-const MediaList = ({ title, type }: { title: string; type: string }) => {
+const MediaList = ({
+  title,
+  type,
+  swiper,
+  category
+}: {
+  title: string
+  type: string
+  swiper?: boolean
+  category?: string
+}) => {
   // const [activeTabId, setActiveTabId] = useState(tabs[0]?.id)
+  const { data: movieData } = useMovies(type)
+  const { data: tvShowData } = useTvShows(type)
 
-  const { data } = useMovies(type)
+  const data = category ? tvShowData : movieData
+
   const mediaList: MovieItem[] = useMemo(() => data?.items.slice(0, 12) || [], [data])
-
-  console.log(mediaList)
 
   // useEffect(() => {
   //   const fetchMediaList = async () => {
@@ -28,14 +47,14 @@ const MediaList = ({ title, type }: { title: string; type: string }) => {
   // }, [activeTabId, tabs])
 
   return (
-    <div className='mt-10 px-5 text-[1.2vw] text-white bg-blackoil'>
-      <div>
+    <div className='mt-10 px-5 text-[1vw] text-white'>
+      {/* <div>
         <p className='font-extrabold capitalize whitespace-nowrap tracking-tight'>
           <span className='bg-gradient-to-r from-orange-400 to-pink-600 bg-clip-text text-transparent'>
             {data?.titlePage}
           </span>
         </p>
-      </div>
+      </div> */}
       <div className='!border-b !border-[#1e2732] mb-3'>
         <button className='mb-1 flex flex-col sm:flex-row sm:items-center sm:justify-between'>
           <div className='!border-b !border-[#d5633d] -mb-1'>
@@ -65,12 +84,48 @@ const MediaList = ({ title, type }: { title: string; type: string }) => {
           </div>
         </button>
       </div>
-      <div className='grid grid-cols-2 gap-2 sm:grid-cols-4 lg:grid-cols-6 lg:gap-3'>
-        {/* {mediaList.length === 0
-          ? [...Array(12)].map((_, index) => <MovieCardSkeleton key={index} />)
-          : mediaList?.map((media) => <MovieCard key={media.id} media={media} activeTabId={activeTabId} />)} */}
-        {mediaList?.map((media) => <MovieCard key={media._id} media={media} />)}
-      </div>
+
+      {!swiper ? (
+        <div className='grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-3'>
+          {mediaList.length === 0
+            ? [...Array(12)].map((_, index) => <MovieCardSkeleton key={index} />)
+            : mediaList?.map((media) => <MovieCard key={media._id} media={media} />)}
+        </div>
+      ) : (
+        <Swiper
+          style={
+            {
+              '--swiper-navigation-color': '#fff',
+              '--swiper-navigation-size': '20px',
+              '--swiper-pagination-color': '#fff'
+            } as React.CSSProperties
+          }
+          modules={[Navigation, Pagination]}
+          spaceBetween={10}
+          slidesPerView={6}
+          navigation={true}
+          breakpoints={{
+            320: {
+              slidesPerView: 2,
+              spaceBetween: 10
+            },
+            640: {
+              slidesPerView: 4,
+              spaceBetween: 15
+            },
+            1024: {
+              slidesPerView: 6,
+              spaceBetween: 20
+            }
+          }}
+        >
+          {mediaList?.map((media) => (
+            <SwiperSlide key={media._id}>
+              <MovieCard media={media} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      )}
     </div>
   )
 }

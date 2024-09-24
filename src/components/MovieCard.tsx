@@ -14,11 +14,14 @@ const MovieCard = ({ media }: { media: MovieItem }) => {
     name,
     lang,
     quality,
+    episode_current,
     tmdb: { type, vote_average }
   } = media
+
+  console.log(media)
   return (
     <Link
-      className='relative overflow-hidden flex flex-col rounded-lg bg-[#212529] shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl h-[350px]'
+      className='relative overflow-hidden flex flex-col rounded-lg bg-[#18314f] shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl h-[380px]'
       to={`/${type === 'movie' ? 'movie' : 'tv'}/${_id}`}
     >
       <div className='aspect-[2/3] overflow-hidden'>
@@ -37,18 +40,26 @@ const MovieCard = ({ media }: { media: MovieItem }) => {
         />
       </div>
       <div className='px-4 py-2 text-center'>
-        <p className='truncate text-base font-normal text-orange-500 mb-1'>{origin_name}</p>
-        <p className='truncate text-sm font-light text-slate-300'>{name}</p>
+        <p className='truncate text-lg font-medium text-[#f96437] mb-1'>{origin_name}</p>
+        <p className='truncate text-[15px] font-light text-slate-300'>{name}</p>
       </div>
-      <div className='absolute right-2 top-2 h-10 w-10 rounded-full bg-black/50 p-0.5'>
-        <CircularRating vote_average={vote_average} />
-      </div>
+      {vote_average > 0 && (
+        <div className='absolute right-2 top-2 h-10 w-10 rounded-full bg-black/50 p-0.5'>
+          <CircularRating vote_average={vote_average} />
+        </div>
+      )}
       <div className='absolute left-2 top-2'>
         <span className='rounded-tl-md rounded-br-md rounded-tr bg-gradient-to-r from-pink-500 to-purple-700 px-2 py-1 text-xs text-white shadow-lg'>
           <span className='relative z-10'>
             {quality}+{lang}
           </span>
           <span className='absolute inset-0 rounded-tl-md rounded-br-md rounded-tr bg-gradient-to-r from-pink-500 to-purple-700 opacity-50 blur'></span>
+        </span>
+      </div>
+      <div className='absolute right-1 bottom-20'>
+        <span className='rounded-tl-md rounded-br-md rounded-tr bg-gradient-to-r from-red-500 to-yellow-500 px-2 py-1 text-xs text-white shadow-lg'>
+          <span className='relative z-10'>{episode_current === 'Full' ? 'Hoàn tất' : episode_current}</span>
+          <span className='absolute inset-0 rounded-tl-md rounded-br-md rounded-tr bg-gradient-to-r from-red-500 to-yellow-700 opacity-50 blur'></span>
         </span>
       </div>
       {/* {type === 'tv' && (
