@@ -52,7 +52,7 @@ const Header = () => {
           <Link to='/'>
             <img className='w-28 sm:w-32' src='/netflix.png' alt='Netflix' />
           </Link>
-          <nav className='hidden space-x-5 text-base text-gray-200 lg:flex uppercase'>
+          <nav className='hidden space-x-5 text-base text-gray-200 lg:flex capitalize'>
             {navItems.map((item) => (
               <NavLink key={item.to} to={item.to}>
                 {item.label}

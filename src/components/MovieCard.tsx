@@ -39,8 +39,8 @@ const MovieCard = ({ media }: { media: MovieItem }) => {
         />
       </div>
       <div className='px-4 py-2 text-center'>
-        <p className='truncate text-lg font-medium text-[#c2f330] mb-1'>{origin_name}</p>
-        <p className='truncate text-[15px] font-light text-slate-300'>{name}</p>
+        <p className='truncate text-base font-medium text-[#c2f330] mb-1'>{origin_name}</p>
+        <p className='truncate text-[15px] font-light text-slate-200'>{name}</p>
       </div>
       {vote_average > 0 && (
         <div className='absolute right-2 top-2 h-10 w-10 rounded-full bg-black/50 p-0.5'>

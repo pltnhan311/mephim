@@ -68,7 +68,7 @@ const MediaList = ({
       <div className='!border-b !border-[#1e2732] mb-3'>
         <button className='mb-1 flex flex-col sm:flex-row sm:items-center sm:justify-between'>
           <div className='!border-b !border-[#d5633d] -mb-1'>
-            <p className='font-extrabold capitalize whitespace-nowrap tracking-tight'>
+            <p className='font-extrabold capitalize whitespace-nowrap tracking-tight text-lg'>
               <span className='bg-gradient-to-r from-orange-400 to-pink-600 bg-clip-text text-transparent'>
                 {title}
               </span>
@@ -96,7 +96,7 @@ const MediaList = ({
       </div>
 
       {!swiper ? (
-        <div className='grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-3'>
+        <div className='grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-4 lg:gap-3'>
           {mediaList.length === 0
             ? [...Array(12)].map((_, index) => <MovieCardSkeleton key={index} />)
             : mediaList?.map((media) => <MovieCard key={media._id} media={media} />)}

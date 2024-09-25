@@ -1,6 +1,9 @@
+import { faChevronRight, faHome } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useMemo, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useFilterCountry, useFilterGenre } from '~/api/filter/use-filter'
+import { useMovies } from '~/api/movie/use-movies'
 import MediaList from '~/components/media-list/MediaList'
 import Sidebar from '~/components/sidebar/Sidebar'
 import { sortOptions, typeData, yearOptions } from '~/constant/constant'
@@ -11,6 +14,7 @@ const MovieList = () => {
   // const [searchParams, setSearchParams] = useSearchParams()
   const shortType = type?.split('-')[1] || ''
 
+  const { data: movieData } = useMovies({ type: shortType })
   const { data: genreData } = useFilterGenre()
   const { data: countryData } = useFilterCountry()
 
@@ -41,7 +45,7 @@ const MovieList = () => {
       },
       {
         title: 'Sắp xếp',
-        key: 'sort',
+        key: 'sort_field',
         items: sortOptions
       }
     ]
@@ -88,19 +92,15 @@ const MovieList = () => {
   console.log(yearOptions)
 
   return (
-    <div className='text-white flex flex-col'>
-      <div className='p-4 shadow-sm mb-4'>
-        <div className='flex justify-between items-center mb-4'>
-          <h2 className='text-2xl font-bold text-white'>{type}</h2>
-        </div>
-        <div className='flex flex-wrap gap-4 max-w-[1200px]'>
+    <div className='text-slate-200 flex flex-col'>
+      <div className='px-4 shadow-sm'>
+        {/* Filter */}
+        <div className='flex flex-wrap gap-4 max-w-[1200px] mb-7'>
           {filtersPanel?.map((filter) => (
             <div key={filter.title} className='flex flex-col flex-grow'>
-              <label className='text-lg my-2 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent font-bold'>
-                {filter.title}
-              </label>
+              <label className='text-base my-2 font-semibold'>{filter.title}</label>
               <select
-                className='bg-[#2c3a57] text-white p-2 rounded-md transition-colors duration-300 hover:bg-[#3b4a6b]'
+                className='bg-[#2c3a57] text-slate-300 p-2 rounded-md transition-colors duration-300 hover:bg-[#3b4a6b]'
                 onChange={(e) => handleFilterChange(filter.key, e.target.value)}
                 value={tempFilters[filter.key] || ''}
               >
@@ -118,17 +118,38 @@ const MovieList = () => {
               className='bg-gradient-to-r from-orange-400 to-pink-600 text-white p-2 rounded-md flex-grow-[0.5] transition-colors duration-300 hover:from-orange-500 hover:to-pink-700'
               onClick={handleApplyFilters}
             >
-              Lọc phim
+              Tìm kiếm
             </button>
           </div>
         </div>
+
+        {/* Breadcrumb */}
+        <div className='flex items-center space-x-2 text-sm px-1'>
+          <Link to='/' className='text-gray-400 hover:text-white transition-colors duration-300'>
+            <FontAwesomeIcon icon={faHome} className='mr-1' />
+            Trang chủ
+          </Link>
+          {movieData?.breadCrumb?.map((item, index) => (
+            <div key={item.slug} className='flex items-center'>
+              <FontAwesomeIcon icon={faChevronRight} className='text-gray-500 mx-2' />
+              <Link
+                to={`/${item.slug}`}
+                className={`${
+                  index === movieData.breadCrumb.length - 1 ? 'text-orange-400' : 'text-gray-400 hover:text-white'
+                } transition-colors duration-300`}
+              >
+                {item.name}
+              </Link>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className='flex'>
-        <div className='w-full flex-[2.5] flex-shrink-0'>
+      <div className='flex flex-col lg:flex-row -mt-7'>
+        <div className='w-full flex-[2.4]'>
           <MediaList title={`Phim ${shortType}`} type={shortType as string} filters={selectedFilters} />
         </div>
-        <div className='w-full flex-1'>
+        <div className='w-full flex-[1]'>
           <Sidebar />
         </div>
       </div>

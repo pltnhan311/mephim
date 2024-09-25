@@ -7,7 +7,10 @@ import { MovieItem } from '~/types/movie/movie-types'
 const Sidebar = () => {
   const [activeTabId, setActiveTabId] = useState('week')
 
-  const { data } = useMovies('moi', activeTabId)
+  const { data } = useMovies({
+    type: 'moi',
+    sort_field: activeTabId
+  })
 
   const items: MovieItem[] = useMemo(() => data?.items.slice(0, 12) || [], [data])
 
@@ -23,7 +26,7 @@ const Sidebar = () => {
         <div className='!border-b !border-[#1e2732] mb-3'>
           <button className='mb-1 flex flex-col sm:flex-row sm:items-center sm:justify-between'>
             <div className='!border-b !border-[#d5633d] -mb-1'>
-              <p className='font-extrabold capitalize whitespace-nowrap tracking-tight'>
+              <p className='font-extrabold capitalize whitespace-nowrap tracking-tight text-lg'>
                 <span className='bg-gradient-to-r from-orange-400 to-pink-600 bg-clip-text text-transparent'>
                   Top Xem Nhiều
                 </span>
