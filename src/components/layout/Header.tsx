@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 // import SearchBar from './SearchBar/SearchBar'
 
 const NavLink = ({ to, children }: { to: string; children: React.ReactNode }) => (
-  <Link to={to} className='transition-colors hover:text-[#ff5d5d] duration-300'>
+  <Link to={to} className='transition-colors hover:text-[#9aff3c] duration-200'>
     {children}
   </Link>
 )
@@ -25,12 +25,12 @@ const Header = () => {
 
   const navItems = [
     { to: '/', label: 'Trang chủ' },
-    { to: '/phim-bo', label: 'Phim bộ' },
-    { to: '/phim-le', label: 'Phim lẻ' },
-    { to: '/tv-shows', label: 'TV Shows' },
-    { to: '/hoat-hinh', label: 'Hoạt hình' },
-    { to: '/the-loai', label: 'Thể loại' },
-    { to: '/quoc-gia', label: 'Quốc gia' }
+    { to: '/list/phim-le', label: 'Phim lẻ' },
+    { to: '/list/phim-bo', label: 'Phim bộ' },
+    { to: '/list/tv-shows', label: 'TV Shows' },
+    { to: '/list/hoat-hinh', label: 'Hoạt hình' },
+    { to: '/list/the-loai', label: 'Thể loại' },
+    { to: '/list/quoc-gia', label: 'Quốc gia' }
   ]
 
   const userMenuItems = [

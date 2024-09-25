@@ -18,7 +18,6 @@ const MovieCard = ({ media }: { media: MovieItem }) => {
     tmdb: { type, vote_average }
   } = media
 
-  console.log(media)
   return (
     <Link
       className='relative overflow-hidden flex flex-col rounded-lg bg-[#18314f] shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl h-[380px]'
@@ -40,7 +39,7 @@ const MovieCard = ({ media }: { media: MovieItem }) => {
         />
       </div>
       <div className='px-4 py-2 text-center'>
-        <p className='truncate text-lg font-medium text-[#f96437] mb-1'>{origin_name}</p>
+        <p className='truncate text-lg font-medium text-[#c2f330] mb-1'>{origin_name}</p>
         <p className='truncate text-[15px] font-light text-slate-300'>{name}</p>
       </div>
       {vote_average > 0 && (

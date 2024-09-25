@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useMovies } from '~/api/movie/use-movies'
 import MovieListItem from '~/components/sidebar/MovieListItem'
@@ -9,7 +9,7 @@ const Sidebar = () => {
 
   const { data } = useMovies('moi', activeTabId)
 
-  const items: MovieItem[] = data?.items || []
+  const items: MovieItem[] = useMemo(() => data?.items.slice(0, 12) || [], [data])
 
   const tabs = [
     { id: 'week', name: 'Tuần' },
