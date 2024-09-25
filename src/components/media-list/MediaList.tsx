@@ -15,15 +15,25 @@ const MediaList = ({
   title,
   type,
   swiper,
-  category
+  category,
+  filters
 }: {
   title: string
   type: string
   swiper?: boolean
   category?: string
+  filters?: Record<string, string>
 }) => {
   // const [activeTabId, setActiveTabId] = useState(tabs[0]?.id)
-  const { data: movieData } = useMovies(type)
+  console.log(filters)
+  const { data: movieData } = useMovies({
+    type,
+    category: filters?.category,
+    country: filters?.country,
+    year: filters?.year,
+    sort_field: filters?.sort_field,
+    page: Number(filters?.page)
+  })
   const { data: tvShowData } = useTvShows(type)
 
   const data = category ? tvShowData : movieData
