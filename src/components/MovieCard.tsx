@@ -7,7 +7,6 @@ import { APP_DOMAIN_CDN_IMAGE } from '~/constant/constant'
 
 const MovieCard = ({ media }: { media: MovieItem }) => {
   const {
-    _id,
     poster_url,
     thumb_url,
     origin_name,
@@ -15,13 +14,15 @@ const MovieCard = ({ media }: { media: MovieItem }) => {
     lang,
     quality,
     episode_current,
-    tmdb: { type, vote_average }
+    tmdb: { vote_average }
   } = media
+
+  console.log(media)
 
   return (
     <Link
       className='relative overflow-hidden flex flex-col rounded-lg bg-[#18314f] shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl h-[380px]'
-      to={`/${type === 'movie' ? 'movie' : 'tv'}/${_id}`}
+      to={`/chi-tiet/${poster_url.split('-poster.jpg')[0]}`}
     >
       <div className='aspect-[2/3] overflow-hidden'>
         <LazyLoadImage

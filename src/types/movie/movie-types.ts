@@ -47,10 +47,9 @@ export interface SeoOnPage {
 }
 
 export interface BreadCrumb {
+  _id: string
   name: string
-  slug?: string
-  isCurrent: boolean
-  position: number
+  slug: string
 }
 
 export interface Pagination {

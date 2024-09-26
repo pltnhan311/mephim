@@ -5,7 +5,7 @@ import PaginateIndicator from '~/components/intro/PaginateIndicator'
 import { MovieItem } from '~/types/movie/movie-types'
 
 const FeatureMovie = () => {
-  const { data } = useMovies('sap-chieu')
+  const { data } = useMovies({ type: 'sap-chieu' })
   const [activeMovieIndex, setActiveMovieIndex] = useState(0)
 
   const items: MovieItem[] = useMemo(() => data?.items || [], [data])

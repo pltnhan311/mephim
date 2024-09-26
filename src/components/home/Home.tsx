@@ -7,8 +7,8 @@ const Home = () => {
     <div className='bg-[#121a2b]'>
       <FeatureMovie />
       <MediaList title='Phim mới' type='sap-chieu' swiper={true} />
-      <div className='flex'>
-        <div className='w-full flex-[2.5]'>
+      <div className='flex flex-col lg:flex-row -mt-7'>
+        <div className='w-full flex-[2.4]'>
           <MediaList title='Phim lẻ' type='le' />
           <MediaList title='Phim bộ' type='bo' />
           <MediaList title='TV Shows' type='tv-shows' category='tv-shows' />
