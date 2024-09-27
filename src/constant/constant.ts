@@ -7,6 +7,17 @@ export const getYouTubeEmbedUrl = (url: string) => {
   return videoIdMatch ? `https://www.youtube.com/embed/${videoIdMatch[1]}` : url
 }
 
+export const formatTime = (seconds: number) => {
+  const date = new Date(seconds * 1000)
+  const hh = date.getUTCHours()
+  const mm = date.getUTCMinutes()
+  const ss = date.getUTCSeconds().toString().padStart(2, '0')
+  if (hh) {
+    return `${hh}:${mm.toString().padStart(2, '0')}:${ss}`
+  }
+  return `${mm}:${ss}`
+}
+
 export const stripHtmlTags = (htmlString: string | undefined) => {
   if (!htmlString) return ''
 

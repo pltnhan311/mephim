@@ -8,8 +8,9 @@ import Loading from '~/components/Loading'
 import MoviePoster from '~/components/movie-detail/MoviePoster'
 import MovieInfo from '~/components/movie-detail/MovieInfo'
 import TrailerButton from '~/components/movie-detail/TrailerButton'
-import { faList, faWarning } from '@fortawesome/free-solid-svg-icons'
+import { faWarning } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import MovieEpisode from '~/components/movie-detail/MovieEpisode'
 
 const MovieDetail = () => {
   const { movieSlug } = useParams()
@@ -32,25 +33,8 @@ const MovieDetail = () => {
                 <TrailerButton trailerUrl={movieData?.trailer_url} />
               </div>
             </div>
-            <div className='my-6'>
-              <div className='w-fit bg-gray-800 px-4 py-2 rounded-t-md shadow-sm flex items-center gap-2'>
-                <FontAwesomeIcon icon={faList} className='text-amber-500' />
-                <p className='font-medium text-yellow-500'>
-                  {movieData?.episodes?.map((episode) => episode.server_name)}
-                </p>
-              </div>
-              <div className='flex flex-wrap items-center gap-3 bg-gray-800 p-4 rounded-b-md shadow-sm'>
-                {movieData?.episodes?.[0]?.server_data?.map((episode) => (
-                  <button
-                    key={episode.slug}
-                    className='w-9 h-9 bg-gray-700 rounded-md flex items-center justify-center text-sm font-semibold transition-colors duration-200 ease-in-out hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50'
-                  >
-                    {episode.name}
-                  </button>
-                ))}
-              </div>
-            </div>
-            <div className='text-amber-400 text-sm flex items-center gap-3 bg-[#224361] p-3 py-4 border-gray-700 mb-3 rounded'>
+            <MovieEpisode movieData={movieData} />
+            <div className='mt-5 text-amber-400 text-sm flex items-center gap-3 bg-[#224361] p-3 py-4 border-gray-700 mb-3 rounded'>
               <FontAwesomeIcon icon={faWarning} />
               <p>Phim bị lỗi thì bình luận bên dưới để ad fix hoặc qua nhóm tele:...</p>
             </div>
