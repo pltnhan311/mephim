@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom'
 import Home from '~/components/home/Home'
 import AppLayout from '~/components/layout/AppLayout'
+import MovieLayout from '~/components/layout/MovieLayout'
 import MovieDetail from '~/components/pages/MovieDetail'
 import MovieList from '~/components/pages/MovieList'
 import StreamingMovie from '~/components/pages/StreamingMovie'
@@ -26,11 +27,13 @@ export const router = createBrowserRouter([
       },
       {
         path: 'chi-tiet/:movieSlug',
-        element: <MovieDetail />
+        element: <MovieLayout />,
+        children: [{ index: true, element: <MovieDetail /> }]
       },
       {
         path: 'xem-phim/:movieSlug',
-        element: <StreamingMovie />
+        element: <MovieLayout />,
+        children: [{ index: true, element: <StreamingMovie /> }]
       }
     ]
   }

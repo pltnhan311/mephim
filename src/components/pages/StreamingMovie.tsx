@@ -20,6 +20,8 @@ import { MovieDetailSlug } from '~/types/movie/movie-types'
 import { APP_DOMAIN_CDN_IMAGE, formatTime } from '~/constant/constant'
 import { useVideoControls } from '~/custom-hook/use-video-controls'
 import MovieContent from '~/components/movie-detail/MovieContent'
+import MovieEpisode from '~/components/movie-detail/MovieEpisode'
+import { useEpisodeContext } from '~/context/EpisodeProvider'
 
 const StreamingMovie: React.FC = () => {
   const { movieSlug } = useParams<{ movieSlug: string }>()
@@ -54,7 +56,7 @@ const StreamingMovie: React.FC = () => {
 
   const handlePlayClick = useCallback(() => setShowVideo(true), [])
 
-  const episode = useMemo(() => movieData?.episodes?.[0]?.server_data?.[0], [movieData])
+  const { activeEpisode, setActiveEpisode, currentEpisode } = useEpisodeContext()
 
   const handleVideoClick = useCallback(
     (event: React.MouseEvent) => {
@@ -110,7 +112,7 @@ const StreamingMovie: React.FC = () => {
                   <div onClick={handleVideoClick} className='absolute inset-0 z-10' />
                   <ReactPlayer
                     ref={playerRef}
-                    url={episode?.link_m3u8}
+                    url={currentEpisode?.link_m3u8}
                     width='100%'
                     height='100%'
                     playing={playing}
@@ -200,6 +202,11 @@ const StreamingMovie: React.FC = () => {
                 </>
               )}
             </div>
+            <MovieEpisode
+              movieData={movieData}
+              activeEpisode={activeEpisode || '1'}
+              setActiveEpisode={setActiveEpisode}
+            />
             <MovieContent movieData={movieData} />
           </div>
           <div className='w-full xl:w-[30%] -mt-10'>

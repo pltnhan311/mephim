@@ -11,11 +11,14 @@ import TrailerButton from '~/components/movie-detail/TrailerButton'
 import { faWarning } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import MovieEpisode from '~/components/movie-detail/MovieEpisode'
+import { useEpisodeContext } from '~/context/EpisodeProvider'
 
 const MovieDetail = () => {
   const { movieSlug } = useParams()
   const { data, isLoading } = useMovie(movieSlug as string)
   const movieData: MovieDetailSlug = useMemo(() => data?.item as MovieDetailSlug, [data])
+
+  const { activeEpisode, setActiveEpisode } = useEpisodeContext()
 
   if (isLoading) return <Loading />
 
@@ -33,7 +36,11 @@ const MovieDetail = () => {
                 <TrailerButton trailerUrl={movieData?.trailer_url} />
               </div>
             </div>
-            <MovieEpisode movieData={movieData} />
+            <MovieEpisode
+              movieData={movieData}
+              activeEpisode={activeEpisode || '1'}
+              setActiveEpisode={setActiveEpisode}
+            />
             <div className='mt-5 text-amber-400 text-sm flex items-center gap-3 bg-[#224361] p-3 py-4 border-gray-700 mb-3 rounded'>
               <FontAwesomeIcon icon={faWarning} />
               <p>Phim bị lỗi thì bình luận bên dưới để ad fix hoặc qua nhóm tele:...</p>
