@@ -8,7 +8,7 @@ const AppLayout = () => {
     <div>
       <Header />
       <div className='bg-[#121a2b] pt-20'>
-        <div className='min-h-screen container'>
+        <div className='min-h-screen container px-4 py-8 bg-gray-900'>
           <div className='mx-4 border-l-4 mb-8 transition-all duration-300 ease-in-out hover:shadow-md bg-[#fef5c4] border-[1px] border-[#fadf98] p-[5px] overflow-hidden text-center text-[10px] md:text-[11px] lg:text-[13px] leading-[1.6] rounded-t-sm -mt-2'>
             <div className='flex items-center justify-center'>
               <FontAwesomeIcon icon={faExclamationTriangle} className='text-amber-600 mr-3 animate-pulse' />

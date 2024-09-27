@@ -2,6 +2,28 @@ export const APP_DOMAIN_CDN_IMAGE = 'https://img.ophim.live'
 
 export const APP_DOMAIN_FRONTEND = 'https://ophim17.cc'
 
+export const getYouTubeEmbedUrl = (url: string) => {
+  const videoIdMatch = url.match(/(?:https?:\/\/)?(?:www\.)?youtube\.com\/watch\?v=([^&]+)/)
+  return videoIdMatch ? `https://www.youtube.com/embed/${videoIdMatch[1]}` : url
+}
+
+export const stripHtmlTags = (htmlString: string | undefined) => {
+  if (!htmlString) return ''
+
+  // Step 1: Remove HTML tags
+  let cleanText = htmlString.replace(/<\/?[^>]+(>|$)/g, '')
+
+  // Step 2: Replace common HTML entities
+  cleanText = cleanText.replace(/&nbsp;/g, ' ') // Replace non-breaking space
+  cleanText = cleanText.replace(/&amp;/g, '&') // Replace &amp; with &
+  cleanText = cleanText.replace(/&quot;/g, '"') // Replace &quot; with "
+  cleanText = cleanText.replace(/&#039;/g, "'") // Replace &#039; with '
+  cleanText = cleanText.replace(/&lt;/g, '<') // Replace &lt; with <
+  cleanText = cleanText.replace(/&gt;/g, '>') // Replace &gt; with >
+
+  return cleanText
+}
+
 export const typeData = [
   {
     _id: 1,

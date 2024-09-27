@@ -14,6 +14,7 @@ const MovieCard = ({ media }: { media: MovieItem }) => {
     lang,
     quality,
     episode_current,
+    slug,
     tmdb: { vote_average }
   } = media
 
@@ -22,7 +23,7 @@ const MovieCard = ({ media }: { media: MovieItem }) => {
   return (
     <Link
       className='relative overflow-hidden flex flex-col rounded-lg bg-[#18314f] shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl h-[380px]'
-      to={`/chi-tiet/${poster_url.split('-poster.jpg')[0]}`}
+      to={`/chi-tiet/${slug}`}
     >
       <div className='aspect-[2/3] overflow-hidden'>
         <LazyLoadImage

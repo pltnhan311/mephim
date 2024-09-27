@@ -1,5 +1,5 @@
 import axiosApi from '~/api/axiosApi'
-import { MovieData } from '~/types/movie/movie-types'
+import { MovieData, MovieDetailData } from '~/types/movie/movie-types'
 
 const movieApi = {
   getMovieList: async (params: {
@@ -20,6 +20,12 @@ const movieApi = {
     }).toString()
 
     const { data } = await axiosApi.get<MovieData>(`/danh-sach/phim-${type}?${queryParams}`)
+    return data || {}
+  },
+
+  getMovieDetail: async (movieSlug: string) => {
+    const { data } = await axiosApi.get<MovieDetailData>(`/phim/${movieSlug}`)
+    console.log(data)
     return data || {}
   }
 }

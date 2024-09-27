@@ -3,6 +3,7 @@ import Home from '~/components/home/Home'
 import AppLayout from '~/components/layout/AppLayout'
 import MovieDetail from '~/components/pages/MovieDetail'
 import MovieList from '~/components/pages/MovieList'
+import StreamingMovie from '~/components/pages/StreamingMovie'
 
 export const router = createBrowserRouter([
   {
@@ -24,8 +25,12 @@ export const router = createBrowserRouter([
         ]
       },
       {
-        path: 'chi-tiet/:movieName',
+        path: 'chi-tiet/:movieSlug',
         element: <MovieDetail />
+      },
+      {
+        path: 'xem-phim/:movieSlug',
+        element: <StreamingMovie />
       }
     ]
   }

@@ -11,7 +11,7 @@ const Breadcrumb = ({ breadCrumb }: { breadCrumb: BreadCrumb[] }) => {
         Trang chủ
       </Link>
       {breadCrumb?.map((item, index) => (
-        <div key={item._id} className='flex items-center'>
+        <div key={`${item._id}-${index}`} className='flex items-center'>
           <FontAwesomeIcon icon={faChevronRight} className='text-gray-500 mx-2' />
           <Link
             to={`/${item.slug}`}
