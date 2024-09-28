@@ -1,5 +1,5 @@
 import React, { useMemo, useCallback, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import ReactPlayer from 'react-player'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -10,7 +10,9 @@ import {
   faExpand,
   faCompress,
   faBackward,
-  faForward
+  faForward,
+  faExclamationTriangle,
+  faChevronDown
 } from '@fortawesome/free-solid-svg-icons'
 import { useMovie } from '~/api/movie/use-movie'
 import Breadcrumb from '~/components/Breadcrumb'
@@ -22,6 +24,7 @@ import { useVideoControls } from '~/custom-hook/use-video-controls'
 import MovieContent from '~/components/movie-detail/MovieContent'
 import MovieEpisode from '~/components/movie-detail/MovieEpisode'
 import { useEpisodeContext } from '~/context/EpisodeProvider'
+import MediaList from '~/components/media-list/MediaList'
 
 const StreamingMovie: React.FC = () => {
   const { movieSlug } = useParams<{ movieSlug: string }>()
@@ -53,6 +56,7 @@ const StreamingMovie: React.FC = () => {
   } = useVideoControls()
 
   const [showVideo, setShowVideo] = useState(false)
+  const [showContent, setShowContent] = useState(false)
 
   const handlePlayClick = useCallback(() => setShowVideo(true), [])
 
@@ -68,8 +72,21 @@ const StreamingMovie: React.FC = () => {
   )
 
   if (isLoading) return <Loading />
-  if (!movieData || !movieData?.episodes) {
-    return <div className='text-red-500'>Error: Failed to load movie data</div>
+  if (!movieData || !movieData?.episodes || !movieData?.episodes?.[0]?.server_data?.[0]?.link_m3u8) {
+    return (
+      <div className='flex flex-col items-center justify-center bg-gray-900'>
+        <div className='text-4xl text-yellow-500 mb-4'>
+          <FontAwesomeIcon icon={faExclamationTriangle} />
+        </div>
+        <h2 className='text-2xl font-bold text-yellow-500 mb-2'>Rất tiếc, phim này hiện chưa có link xem 😭</h2>
+        <p className='text-gray-400 mb-4'>Mong bạn thông cảm. Mời bạn xem phim khác.</p>
+        <Link to='/'>
+          <button className='px-4 py-2 bg-gray-600/50 text-white rounded hover:bg-gray-600/70 transition duration-300'>
+            Xem phim khác
+          </button>
+        </Link>
+      </div>
+    )
   }
 
   return (
@@ -77,7 +94,7 @@ const StreamingMovie: React.FC = () => {
       <div className='container mx-auto px-4 py-8'>
         <Breadcrumb breadCrumb={data?.breadCrumb || []} />
 
-        <div className='flex flex-col xl:flex-row gap-8 mt-5'>
+        <div className='flex flex-col xl:flex-row gap-8 mt-2'>
           <div className='w-full xl:w-[70%] mt-10'>
             <div
               ref={playerContainerRef}
@@ -202,12 +219,40 @@ const StreamingMovie: React.FC = () => {
                 </>
               )}
             </div>
+            <div className='mt-6 bg-gray-800 p-4 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl'>
+              <div className='mb-4 gap-3'>
+                <h2 className='text-xl font-semibold text-amber-500 capitalize'>{movieData?.name}</h2>
+                <p className='text-sm text-gray-400 mt-1'>
+                  {movieData?.episode_current} | {movieData?.quality} + {movieData?.lang}
+                </p>
+              </div>
+              <div className='border-t border-gray-700 pt-2'>
+                <button
+                  onClick={() => setShowContent((prev) => !prev)}
+                  className='flex items-center justify-between w-full text-gray-300 hover:text-amber-500 transition-colors duration-300'
+                >
+                  <span className='font-light'>Nội dung phim</span>
+                  <FontAwesomeIcon
+                    icon={faChevronDown}
+                    className={`transform transition-transform duration-200 ${showContent ? 'rotate-180' : ''}`}
+                  />
+                </button>
+                {showContent && (
+                  <div className='mt-3 text-gray-400 animate-fadeIn'>
+                    <MovieContent movieData={movieData} />
+                  </div>
+                )}
+              </div>
+            </div>
             <MovieEpisode
               movieData={movieData}
-              activeEpisode={activeEpisode || '1'}
+              activeEpisode={activeEpisode || movieData?.episodes?.[0]?.server_data?.[0]?.name}
               setActiveEpisode={setActiveEpisode}
             />
-            <MovieContent movieData={movieData} />
+
+            <div className='-mx-4'>
+              <MediaList title='Có thể bạn sẽ thích' type='tv-shows' category='tv-shows' />
+            </div>
           </div>
           <div className='w-full xl:w-[30%] -mt-10'>
             <Sidebar />

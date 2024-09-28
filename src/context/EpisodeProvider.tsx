@@ -18,16 +18,16 @@ export const EpisodeProvider: React.FC<{ children: React.ReactNode; movieData: M
   const [activeEpisode, setActiveEpisode] = useState<string | null>(null)
   const episodes = movieData?.episodes?.[0]?.server_data
 
-  useEffect(() => {
-    if (episodes) {
-      setActiveEpisode(episodes[0]?.name || null)
-    }
-  }, [location.pathname, movieData, episodes])
-
   const currentEpisode = React.useMemo(() => {
     if (!episodes || !activeEpisode) return null
     return episodes.find((ep) => ep.name === activeEpisode) || null
   }, [episodes, activeEpisode])
+
+  useEffect(() => {
+    if (location.pathname.includes('chi-tiet')) {
+      setActiveEpisode(movieData?.episodes?.[0]?.server_data?.[0]?.name)
+    }
+  }, [location.pathname, movieData])
 
   return (
     <EpisodeContext.Provider value={{ activeEpisode, setActiveEpisode, currentEpisode }}>

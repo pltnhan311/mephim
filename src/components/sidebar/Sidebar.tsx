@@ -56,7 +56,7 @@ const Sidebar = () => {
         {items?.slice(0, 13).map((item) => (
           <Link
             key={item._id}
-            to={`/movie/${item._id}`}
+            to={`/chi-tiet/${item.slug}`}
             className='block rounded-lg transition-colors duration-300 hover:bg-slate-700/50'
           >
             <MovieListItem key={item._id} item={item} />

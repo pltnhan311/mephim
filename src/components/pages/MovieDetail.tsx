@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useMovie } from '~/api/movie/use-movie'
 import Breadcrumb from '~/components/Breadcrumb'
@@ -12,10 +12,13 @@ import { faWarning } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import MovieEpisode from '~/components/movie-detail/MovieEpisode'
 import { useEpisodeContext } from '~/context/EpisodeProvider'
+import MediaList from '~/components/media-list/MediaList'
+import MovieContent from '~/components/movie-detail/MovieContent'
 
 const MovieDetail = () => {
   const { movieSlug } = useParams()
   const { data, isLoading } = useMovie(movieSlug as string)
+  const [showEpisode, setShowEpisode] = useState(false)
   const movieData: MovieDetailSlug = useMemo(() => data?.item as MovieDetailSlug, [data])
 
   const { activeEpisode, setActiveEpisode } = useEpisodeContext()
@@ -30,17 +33,19 @@ const MovieDetail = () => {
         <div className='flex flex-col xl:flex-row'>
           <div className='w-full flex-[2.4]'>
             <div className='mt-8 flex flex-col md:flex-row gap-8'>
-              <MoviePoster movieData={movieData} />
+              <MoviePoster movieData={movieData} showEpisode={showEpisode} setShowEpisode={setShowEpisode} />
               <div className='md:w-2/3'>
                 <MovieInfo movieData={movieData} />
                 <TrailerButton trailerUrl={movieData?.trailer_url} />
               </div>
             </div>
-            <MovieEpisode
-              movieData={movieData}
-              activeEpisode={activeEpisode || '1'}
-              setActiveEpisode={setActiveEpisode}
-            />
+            {showEpisode && (
+              <MovieEpisode
+                movieData={movieData}
+                activeEpisode={activeEpisode || movieData?.episodes?.[0]?.server_data?.[0]?.name}
+                setActiveEpisode={setActiveEpisode}
+              />
+            )}
             <div className='mt-5 text-amber-400 text-sm flex items-center gap-3 bg-[#224361] p-3 py-4 border-gray-700 mb-3 rounded'>
               <FontAwesomeIcon icon={faWarning} />
               <p>Phim bị lỗi thì bình luận bên dưới để ad fix hoặc qua nhóm tele:...</p>
@@ -54,9 +59,11 @@ const MovieDetail = () => {
                   </span>
                 </p>
               </div>
-              <div>
-                <p className='text-[15px] text-slate-400 tracking-wide'>{movieData?.content}</p>
-              </div>
+              <MovieContent movieData={movieData} />
+            </div>
+
+            <div className='-mx-4'>
+              <MediaList title='Có thể bạn sẽ thích' type='le' />
             </div>
           </div>
 

@@ -1,12 +1,14 @@
 import { faCalendar, faClock, faInfoCircle, faLanguage, faPlay, faVideo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
-import { APP_DOMAIN_CDN_IMAGE } from '~/constant/constant'
+import { APP_DOMAIN_CDN_IMAGE, getYouTubeEmbedUrl } from '~/constant/constant'
 import { formatDuration } from '~/utils'
 import CircularRating from '~/components/CircularRating'
 import { MovieItem } from '~/types/movie/movie-types'
+import { useModalContext } from '~/context/ModalProvider'
+import { useMovie } from '~/api/movie/use-movie'
 
-const Movie = ({ item, data }: { item: MovieItem } & { data: MovieItem }) => {
+export default function Movie({ item, data }: { item: MovieItem } & { data: MovieItem }) {
   return (
     <div className='relative h-[80vh] w-full'>
       <BackgroundImage item={item} />
@@ -58,17 +60,34 @@ const MovieInfo = ({ item, data }: { item: MovieItem } & { data: MovieItem }) =>
   </div>
 )
 
-const MovieActions = ({ data }: { data: MovieItem }) => (
-  <div className='flex space-x-4'>
-    <button className='flex items-center rounded bg-red-600 text-white px-6 py-2 transition-all hover:bg-red-700 shadow-lg transform hover:scale-105'>
-      <FontAwesomeIcon icon={faPlay} className='mr-2' /> Trailer
-    </button>
-    <Link to={`/movie/${data._id}`}>
-      <button className='flex items-center rounded bg-gray-600 bg-opacity-70 px-6 py-2 text-white transition-all hover:bg-opacity-80 shadow-lg transform hover:scale-105'>
-        <FontAwesomeIcon icon={faInfoCircle} className='mr-2' /> More Info
-      </button>
-    </Link>
-  </div>
-)
+const MovieActions = ({ data }: { data: MovieItem }) => {
+  const { openPopup } = useModalContext()
+  const { data: movie } = useMovie(data.slug)
 
-export default Movie
+  const handleClick = () => {
+    openPopup(
+      <iframe
+        title='Trailer'
+        src={getYouTubeEmbedUrl(movie?.item?.trailer_url || '')}
+        className='aspect-video w-full max-w-4xl'
+        allowFullScreen
+      />
+    )
+  }
+
+  return (
+    <div className='flex space-x-4'>
+      <button
+        className='flex items-center rounded bg-red-600 text-white px-6 py-2 transition-all hover:bg-red-700 shadow-lg transform hover:scale-105'
+        onClick={handleClick}
+      >
+        <FontAwesomeIcon icon={faPlay} className='mr-2' /> Trailer
+      </button>
+      <Link to={`/chi-tiet/${data.slug}`}>
+        <button className='flex items-center rounded bg-gray-600 bg-opacity-70 px-6 py-2 text-white transition-all hover:bg-opacity-80 shadow-lg transform hover:scale-105'>
+          <FontAwesomeIcon icon={faInfoCircle} className='mr-2' /> More Info
+        </button>
+      </Link>
+    </div>
+  )
+}
