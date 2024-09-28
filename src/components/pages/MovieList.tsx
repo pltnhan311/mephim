@@ -88,8 +88,6 @@ const MovieList = () => {
   //   setSearchParams(newSearchParams)
   // }
 
-  console.log(yearOptions)
-
   return (
     <div className='text-slate-200 flex flex-col'>
       <div className='px-4 shadow-sm'>

@@ -5,7 +5,8 @@ const movieKeys = {
   lists: () => [...movieKeys.all, 'list'] as const,
   list: (params: MovieParams) => [...movieKeys.lists(), params] as const,
   details: () => [...movieKeys.all, 'detail'] as const,
-  detail: (movieSlug: string) => [...movieKeys.details(), movieSlug] as const
+  detail: (movieSlug: string) => [...movieKeys.details(), movieSlug] as const,
+  search: (keyword: string) => [...movieKeys.all, 'search', keyword] as const
 }
 
 export default movieKeys

@@ -11,10 +11,19 @@ export default {
         'times-new-roman': ['Times New Roman', 'serif']
       },
       colors: {
-        blackoil: '#141414'
+        blackoil: '#141414',
+        layout: '#222438',
+        container: '#191b2d',
+        header: '#181c3e',
+        ghostWhite: '#F3F4F6',
+        lightGhostWhite: '#e6e7eb',
+        lime: '#b0e633',
+        basicIndigo: '#4338ca',
+        lightIndigo: '#6366f1',
+        darkIndigo: '#3730a3',
+        hoverIndigo: '#4338ca'
       }
     }
   },
   plugins: []
 }
-

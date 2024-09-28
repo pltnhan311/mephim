@@ -12,7 +12,7 @@ const FeatureMovie = () => {
   const activeMovie = useMemo(() => items[activeMovieIndex], [activeMovieIndex, items])
 
   return (
-    <div className='relative text-white mb-10'>
+    <div className='relative'>
       {activeMovie && (
         <Movie key={activeMovie._id} item={activeMovie} data={data?.items[activeMovieIndex] as MovieItem} />
       )}

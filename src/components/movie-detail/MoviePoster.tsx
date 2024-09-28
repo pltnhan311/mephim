@@ -27,7 +27,7 @@ const MoviePoster = ({ movieData, showEpisode, setShowEpisode }: MoviePosterProp
           className='w-full rounded-lg shadow-lg brightness-80'
           effect='blur'
           wrapperProps={{
-            style: { transitionDelay: '0.5s' }
+            style: { transitionDelay: '0.2s' }
           }}
         />
         <div className='absolute bottom-4 left-4 right-4 flex gap-4'>

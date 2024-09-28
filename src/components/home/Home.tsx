@@ -4,11 +4,11 @@ import Sidebar from '~/components/sidebar/Sidebar'
 
 const Home = () => {
   return (
-    <div className='bg-[#121a2b]'>
+    <div className='bg-container'>
       <FeatureMovie />
       <MediaList title='Phim mới' type='sap-chieu' swiper={true} />
-      <div className='flex flex-col lg:flex-row'>
-        <div className='w-full flex-[2.4]'>
+      <div className='flex flex-col lg:flex-row gap-5'>
+        <div className='w-full flex-[2]'>
           <MediaList title='Phim lẻ' type='le' />
           <MediaList title='Phim bộ' type='bo' />
           <MediaList title='TV Shows' type='tv-shows' category='tv-shows' />

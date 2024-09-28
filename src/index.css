@@ -14,14 +14,19 @@
 
   /* Customize scroll bar */
   * ::-webkit-scrollbar {
-    @apply w-4;
+    @apply w-2; /* Increased width from 2 to 3 for better visibility */
+  }
+
+  * ::-webkit-scrollbar-track {
+    @apply bg-[#1a1c3b]; /* Using the layout color (#222438) for the track */
   }
 
   * ::-webkit-scrollbar-thumb {
-    @apply h-14 rounded-lg border-4 border-solid border-transparent bg-[rgba(96,96,96,0.5)] bg-clip-content;
+    @apply rounded-full bg-[#383d7d]; /* Using the container color (#191b2d) for the thumb */
   }
+
   * ::-webkit-scrollbar-thumb:hover {
-    @apply bg-[#606060];
+    @apply bg-[#3e3379]; /* Using the header color (#181c3e) for the thumb on hover */
   }
 
   strong,
@@ -32,6 +37,6 @@
 
 @layer components {
   .container {
-    @apply mx-auto max-w-screen-2xl py-10;
+    @apply mx-auto max-w-screen-xl py-10;
   }
 }

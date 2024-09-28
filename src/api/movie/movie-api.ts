@@ -25,7 +25,11 @@ const movieApi = {
 
   getMovieDetail: async (movieSlug: string) => {
     const { data } = await axiosApi.get<MovieDetailData>(`/phim/${movieSlug}`)
-    console.log(data)
+    return data || {}
+  },
+
+  getMovieSearch: async (keyword: string) => {
+    const { data } = await axiosApi.get<MovieData>(`/tim-kiem?keyword=${keyword}`)
     return data || {}
   }
 }

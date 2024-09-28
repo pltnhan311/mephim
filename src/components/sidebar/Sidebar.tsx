@@ -21,7 +21,7 @@ const Sidebar = () => {
   ]
 
   return (
-    <div className='mt-10 px-5 text-[1vw] text-white'>
+    <div className='mt-10 text-[1vw] text-white'>
       <div className='flex justify-between'>
         <div className='!border-b !border-[#1e2732] mb-3'>
           <button className='mb-1 flex flex-col sm:flex-row sm:items-center sm:justify-between'>

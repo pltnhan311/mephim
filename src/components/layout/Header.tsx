@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react'
-import { faBell, faUser, IconDefinition } from '@fortawesome/free-solid-svg-icons'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
+import SearchBar from '~/components/search-bar/SearchBar'
 // import SearchBar from './SearchBar/SearchBar'
 
 const NavLink = ({ to, children }: { to: string; children: React.ReactNode }) => (
   <Link to={to} className='transition-colors hover:text-[#9aff3c] duration-200'>
     {children}
   </Link>
-)
-
-const IconButton = ({ icon }: { icon: IconDefinition }) => (
-  <FontAwesomeIcon icon={icon} className='cursor-pointer text-xl text-gray-200 transition-colors hover:text-white' />
 )
 
 const Header = () => {
@@ -41,10 +38,8 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 z-50 w-full transition-all duration-300 bg-[#121a2b] shadow-lg ${
-        isScrolled
-          ? 'bg-[#141414]/90 backdrop-blur-sm bg-gradient-to-r from-black/70 to-transparent'
-          : 'bg-gradient-to-r from-black/70 to-transparent'
+      className={`fixed top-0 z-50 w-full transition-all duration-300 bg-header shadow-lg ${
+        isScrolled && 'bg-[#141414]/90 backdrop-blur-sm bg-gradient-to-r from-black/70 to-transparent'
       }`}
     >
       <div className='mx-auto flex h-20 max-w-full items-center justify-between px-6 sm:px-8 lg:px-12 '>
@@ -60,12 +55,11 @@ const Header = () => {
             ))}
           </nav>
         </div>
-        <div className='flex items-center space-x-6'>
-          {/* <SearchBar /> */}
-          <IconButton icon={faBell} />
+        <div className='flex items-center space-x-4'>
+          <SearchBar />
           <div className='group relative cursor-pointer'>
             <FontAwesomeIcon icon={faUser} className='text-xl text-gray-200 transition-colors group-hover:text-white' />
-            <div className='absolute right-0 mt-2 hidden w-48 rounded-md bg-[#141414] py-2 shadow-lg group-hover:block'>
+            <div className='absolute right-0 mt-2 hidden w-48 rounded-md bg-container py-2 shadow-lg group-hover:block'>
               {userMenuItems.map((item) => (
                 <Link key={item.to} to={item.to} className='block px-4 py-2 text-sm text-gray-200 hover:bg-gray-800'>
                   {item.label}

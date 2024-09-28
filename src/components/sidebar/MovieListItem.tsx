@@ -21,7 +21,7 @@ const MovieListItem = ({ item }: { item: MovieItem }) => {
           effect='blur'
           className='w-full h-full object-cover'
           wrapperProps={{
-            style: { transitionDelay: '0.5s' }
+            style: { transitionDelay: '0.2s' }
           }}
         />
       </div>
