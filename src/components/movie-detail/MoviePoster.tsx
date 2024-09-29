@@ -65,7 +65,7 @@ interface PosterButtonProps {
 const PosterButton = ({ icon, text, gradientFrom, gradientTo, shadowColor, onClick }: PosterButtonProps) => {
   return (
     <button
-      className={`relative flex items-center bg-gradient-to-r ${gradientFrom} ${gradientTo} hover:${gradientTo} hover:${gradientFrom} text-white py-2 px-3 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl flex-1 justify-center text-sm lg:text-[15px]`}
+      className={`relative flex items-center bg-gradient-to-r ${gradientFrom} ${gradientTo} hover:${gradientTo} hover:${gradientFrom} text-white py-2 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl flex-1 justify-center text-sm`}
       style={{
         boxShadow: `0 2px 4px ${shadowColor}`
       }}

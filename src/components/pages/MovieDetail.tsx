@@ -26,12 +26,12 @@ const MovieDetail = () => {
   if (isLoading) return <Loading />
 
   return (
-    <div className='bg-gray-900 text-white'>
+    <div className=''>
       <div className='px-4 py-8'>
         <Breadcrumb breadCrumb={data?.breadCrumb || []} />
 
-        <div className='flex flex-col xl:flex-row'>
-          <div className='w-full flex-[2.4]'>
+        <div className='flex flex-col xl:flex-row gap-5'>
+          <div className='w-full flex-[2]'>
             <div className='mt-8 flex flex-col md:flex-row gap-8'>
               <MoviePoster movieData={movieData} showEpisode={showEpisode} setShowEpisode={setShowEpisode} />
               <div className='md:w-2/3'>
@@ -46,12 +46,12 @@ const MovieDetail = () => {
                 setActiveEpisode={setActiveEpisode}
               />
             )}
-            <div className='mt-5 text-amber-400 text-sm flex items-center gap-3 bg-[#224361] p-3 py-4 border-gray-700 mb-3 rounded'>
+            <div className='mt-5 text-amber-400 text-sm flex items-center gap-3 bg-[#27273e] p-3 py-4 border-gray-700 mb-3 rounded'>
               <FontAwesomeIcon icon={faWarning} />
               <p>Phim bị lỗi thì bình luận bên dưới để ad fix hoặc qua nhóm tele:...</p>
             </div>
 
-            <div className='bg-gray-800 p-4 rounded-md mt-5'>
+            <div className='bg-[#27273e] p-4 rounded-md mt-5'>
               <div className='mb-5 !border-b !border-[#d5633d] w-fit'>
                 <p className='font-extrabold capitalize whitespace-nowrap tracking-tight text-lg'>
                   <span className='bg-gradient-to-r from-orange-400 to-pink-600 bg-clip-text text-transparent'>
@@ -67,7 +67,7 @@ const MovieDetail = () => {
             </div>
           </div>
 
-          <div className='w-full flex-[1.1]'>
+          <div className='w-full flex-1'>
             <Sidebar />
           </div>
         </div>

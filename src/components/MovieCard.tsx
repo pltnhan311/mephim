@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { MovieItem } from '~/types/movie/movie-types'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
-import CircularRating from '~/components/CircularRating'
+// import CircularRating from '~/components/CircularRating'
 import { APP_DOMAIN_CDN_IMAGE } from '~/constant/constant'
 
 const MovieCard = ({ media }: { media: MovieItem }) => {
@@ -14,8 +14,8 @@ const MovieCard = ({ media }: { media: MovieItem }) => {
     lang,
     quality,
     episode_current,
-    slug,
-    tmdb: { vote_average }
+    slug
+    // tmdb: { vote_average }
   } = media
 
   return (
@@ -39,14 +39,14 @@ const MovieCard = ({ media }: { media: MovieItem }) => {
         />
       </div>
       <div className='px-2 py-2 text-center'>
-        <p className='truncate text-[15px] font-medium text-lime'>{origin_name}</p>
+        <p className='truncate text-[15px] font-medium text-basicLime'>{origin_name}</p>
         <p className='truncate text-sm font-light text-lightGhostWhite'>{name}</p>
       </div>
-      {vote_average > 0 && (
+      {/* {vote_average > 0 && (
         <div className='absolute right-2 top-2 h-10 w-10 rounded-full bg-black/50 p-0.5'>
           <CircularRating vote_average={vote_average} />
         </div>
-      )}
+      )} */}
       <div className='absolute left-2 top-2'>
         <span className='rounded-tl-md rounded-br-md rounded-tr bg-gradient-to-r from-pink-500 to-purple-700 px-2 py-1 text-xs shadow-lg'>
           <span className='relative z-10'>

@@ -16,24 +16,26 @@ const MediaList = ({
   type,
   swiper,
   category,
-  filters
+  filters,
+  searchDataList
 }: {
   title: string
-  type: string
+  type?: string
   swiper?: boolean
   category?: string
   filters?: Record<string, string>
+  searchDataList?: MovieItem[]
 }) => {
   // const [activeTabId, setActiveTabId] = useState(tabs[0]?.id)
   const { data: movieData } = useMovies({
-    type,
+    type: type || '',
     category: filters?.category,
     country: filters?.country,
     year: filters?.year,
     sort_field: filters?.sort_field,
     page: Number(filters?.page)
   })
-  const { data: tvShowData } = useTvShows(type)
+  const { data: tvShowData } = useTvShows(type || '')
 
   const data = category ? tvShowData : movieData
 
@@ -54,10 +56,16 @@ const MediaList = ({
       </div>
 
       {!swiper ? (
-        <div className='grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-3'>
+        <div
+          className={`grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 lg:gap-3 ${
+            searchDataList ? 'xl:grid-cols-5 2xl:grid-cols-6' : ''
+          } `}
+        >
           {mediaList.length === 0
             ? [...Array(12)].map((_, index) => <MovieCardSkeleton key={index} />)
-            : mediaList?.map((media) => <MovieCard key={media._id} media={media} />)}
+            : searchDataList
+              ? searchDataList?.map((media) => <MovieCard key={media._id} media={media} />)
+              : mediaList?.map((media) => <MovieCard key={media._id} media={media} />)}
         </div>
       ) : (
         <Swiper

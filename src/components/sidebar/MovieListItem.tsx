@@ -26,7 +26,7 @@ const MovieListItem = ({ item }: { item: MovieItem }) => {
         />
       </div>
       <div className='flex flex-col font-light space-y-1 max-w-[300px] pr-8'>
-        <p className='text-lg text-[#2bd545] font-medium break-words'>{origin_name}</p>
+        <p className='text-lg text-blue-500 font-medium break-words'>{origin_name}</p>
         <p className='text-base break-words'>{name}</p>
         <p className='text-sm text-gray-400'>{year}</p>
 

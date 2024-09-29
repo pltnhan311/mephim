@@ -20,7 +20,7 @@ const MovieContent: React.FC<MovieContentProps> = ({ movieData }) => {
         : `${stripHtmlTags(movieData?.content)?.slice(0, CONTENT_PREVIEW_LENGTH)}...`}
       {(movieData?.content?.length || 0) > CONTENT_PREVIEW_LENGTH && (
         <div className='w-fit flex items-center justify-start bg-gradient-to-r from-orange-500 to-pink-500 px-3 py-0.5 text-sm rounded-md mt-3 shadow-sm hover:from-blue-500 hover:to-purple-500 transition-all ease-in-out duration-300'>
-          <button onClick={toggleContent} className='text-white transition-colors'>
+          <button onClick={toggleContent} className='transition-colors'>
             {showFullContent ? 'Thu gọn' : 'Mở rộng'}
           </button>
         </div>

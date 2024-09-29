@@ -17,7 +17,7 @@ export default {
         header: '#181c3e',
         ghostWhite: '#F3F4F6',
         lightGhostWhite: '#e6e7eb',
-        lime: '#b0e633',
+        basicLime: '#b0e633',
         basicIndigo: '#4338ca',
         lightIndigo: '#6366f1',
         darkIndigo: '#3730a3',

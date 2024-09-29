@@ -42,7 +42,7 @@ const Sidebar = () => {
                 onClick={() => setActiveTabId(tab.id)}
                 className={`flex items-center justify-center rounded-sm text-xs px-2 py-1.5 transition-all duration-300 border border-white/10 ${
                   activeTabId === tab.id
-                    ? 'bg-gradient-to-r from-blue-500 to-green-600 text-white shadow-lg'
+                    ? 'bg-gradient-to-r from-orange-500 to-pink-600 shadow-lg'
                     : 'text-gray-400 hover:bg-white/10 hover:text-white'
                 }`}
               >
