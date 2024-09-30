@@ -5,10 +5,11 @@ import MovieLayout from '~/components/layout/MovieLayout'
 import MovieDetail from '~/components/pages/MovieDetail'
 import MovieList from '~/components/pages/MovieList'
 import SearchList from '~/components/pages/SearchList'
-import StreamingMovie from '~/components/pages/StreamingMovie'
+// import StreamingMovie from '~/components/pages/StreamingMovie'
 import SearchProvider from '~/context/SearchProvider'
 import ModalProvider from '~/context/ModalProvider'
 import MovieFilter from '~/components/pages/MovieFilter'
+import StreamingBasic from '~/components/pages/StreamingBasic'
 
 const RootLayout = () => (
   <SearchProvider>
@@ -48,7 +49,8 @@ export const router = createBrowserRouter([
           {
             path: 'xem-phim/:movieSlug',
             element: <MovieLayout />,
-            children: [{ index: true, element: <StreamingMovie /> }]
+            // children: [{ index: true, element: <StreamingMovie /> }]
+            children: [{ index: true, element: <StreamingBasic /> }]
           },
           {
             path: 'tim-kiem',
