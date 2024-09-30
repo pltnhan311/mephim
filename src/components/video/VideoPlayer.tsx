@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import ReactPlayer from 'react-player'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -13,7 +13,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import { formatTime } from '~/constant/constant'
 import { useVideoControls } from '~/custom-hook/use-video-controls'
-import screenfull from 'screenfull'
 
 interface VideoPlayerProps {
   url: string
@@ -40,6 +39,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
     handleEnded,
     handleBackward,
     handleForward,
+    handleToggleFullscreen,
     showControlsTemporarily,
     setPlaying
   } = useVideoControls()
@@ -49,12 +49,6 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
     setPlaying((prev) => !prev)
     showControlsTemporarily()
   }
-
-  const handleToggleFullscreen = useCallback(() => {
-    if (playerContainerRef.current && screenfull.isEnabled) {
-      screenfull.toggle(playerContainerRef.current)
-    }
-  }, [playerContainerRef])
 
   return (
     <div

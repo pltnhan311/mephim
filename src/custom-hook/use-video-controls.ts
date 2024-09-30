@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from 'react'
 import ReactPlayer from 'react-player'
+import screenfull from 'screenfull'
 
 export const useVideoControls = () => {
   const [playing, setPlaying] = useState(true)
@@ -44,13 +45,26 @@ export const useVideoControls = () => {
   const handleEnded = useCallback(() => setPlaying(false), [])
 
   const handleToggleFullscreen = useCallback(() => {
-    if (!isFullscreen) {
-      playerContainerRef.current?.requestFullscreen()
-    } else {
-      document.exitFullscreen()
+    if (playerContainerRef.current && screenfull.isEnabled) {
+      screenfull.toggle(playerContainerRef.current)
     }
-    setIsFullscreen((prev) => !prev)
-  }, [isFullscreen])
+  }, [])
+
+  useEffect(() => {
+    const handleFullscreenChange = () => {
+      setIsFullscreen(screenfull.isFullscreen)
+    }
+
+    if (screenfull.isEnabled) {
+      screenfull.on('change', handleFullscreenChange)
+    }
+
+    return () => {
+      if (screenfull.isEnabled) {
+        screenfull.off('change', handleFullscreenChange)
+      }
+    }
+  }, [])
 
   const handleBackward = useCallback(() => {
     const currentTime = playerRef.current?.getCurrentTime() || 0
