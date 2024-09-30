@@ -10,7 +10,7 @@ interface MovieProps {
 
 const Movie: React.FC<MovieProps> = ({ item, data }) => {
   return (
-    <div className='relative h-[80vh] w-full'>
+    <div className='relative h-[25vh] sm:min-h-[80vh] w-full p-4 md:p-0'>
       <BackgroundImage item={item} />
       <MovieDetails item={item} data={data} />
     </div>

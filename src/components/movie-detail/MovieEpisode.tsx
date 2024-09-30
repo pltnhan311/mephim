@@ -15,13 +15,13 @@ const MovieEpisode: React.FC<MovieEpisodeProps> = ({ movieData, activeEpisode, s
 
   return (
     <div className='my-6'>
-      <div className='w-48 bg-gray-800 px-4 py-2 rounded-t-md shadow-sm flex items-center gap-2'>
+      <div className='w-48 bg-subModal px-4 py-2 rounded-t-md shadow-sm flex items-center gap-2'>
         <FontAwesomeIcon icon={faList} className='text-amber-500' />
         <p className='font-medium text-amber-500 uppercase text-sm'>
           {movieData?.episodes?.map((episode) => episode.server_name)}
         </p>
       </div>
-      <div className='flex flex-wrap items-center gap-2 bg-gray-800 p-3 rounded-b-md rounded-tr-md shadow-sm'>
+      <div className='flex flex-wrap items-center gap-2 bg-subModal p-3 rounded-b-md rounded-tr-md shadow-sm'>
         {episodes?.map((episode) => (
           <button
             key={episode.slug}

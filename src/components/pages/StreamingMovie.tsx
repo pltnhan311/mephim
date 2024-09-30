@@ -101,10 +101,10 @@ const PosterWithPlayButton: React.FC<{ posterUrl: string; onPlayClick: () => voi
 )
 
 const MovieInfo: React.FC<{ movieData: MovieDetailSlug }> = ({ movieData }) => (
-  <div className='mt-6 bg-gray-800 p-4 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl'>
+  <div className='mt-6 bg-subModal p-4 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl'>
     <div className='mb-4 gap-3'>
-      <h2 className='text-xl font-semibold text-amber-500 capitalize'>{movieData?.name}</h2>
-      <p className='text-sm text-gray-400 mt-1'>
+      <h2 className='text-sm sm:text-base md:text-lg font-semibold text-amber-500 capitalize'>{movieData?.name}</h2>
+      <p className='text-xs sm:text-sm md:text-base text-gray-400 mt-1'>
         {movieData?.episode_current} | {movieData?.quality} + {movieData?.lang}
       </p>
     </div>
