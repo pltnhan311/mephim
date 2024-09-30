@@ -68,9 +68,14 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
         muted={muted}
         onProgress={handleProgress}
         onEnded={handleEnded}
+        playsinline={true}
         config={{
           file: {
-            forceHLS: true
+            forceHLS: false,
+            attributes: {
+              controlsList: 'nodownload',
+              playsInline: true
+            }
           }
         }}
       />
