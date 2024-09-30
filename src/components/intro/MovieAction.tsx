@@ -28,12 +28,14 @@ const MovieActions: React.FC<MovieActionsProps> = ({ data }) => {
 
   return (
     <div className='flex space-x-4 text-sm mt-2'>
-      <button
-        className='flex items-center rounded bg-basicIndigo text-white px-4 py-2 transition-all hover:bg-indigo-700 shadow-lg transform hover:scale-105'
-        onClick={handleClick}
-      >
-        <FontAwesomeIcon icon={faPlay} className='mr-2' /> Trailer
-      </button>
+      {movie?.item?.trailer_url && (
+        <button
+          className='flex items-center rounded bg-basicIndigo text-white px-4 py-2 transition-all hover:bg-indigo-700 shadow-lg transform hover:scale-105'
+          onClick={handleClick}
+        >
+          <FontAwesomeIcon icon={faPlay} className='mr-2' /> Trailer
+        </button>
+      )}
       <Link to={`/chi-tiet/${data.slug}`}>
         <button className='flex items-center rounded bg-gray-600 bg-opacity-70 px-4 py-2 text-white transition-all hover:bg-opacity-80 shadow-lg transform hover:scale-105'>
           <FontAwesomeIcon icon={faInfoCircle} className='mr-2' /> More Info

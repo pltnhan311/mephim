@@ -40,8 +40,8 @@ const ActorInfo = ({ actors }: { actors?: string[] }) => (
 
 const RatingInfo = ({ tmdb }: { tmdb?: { vote_average: number; vote_count: number } }) => (
   <div className='flex items-center mb-6'>
-    <span className='text-yellow-400 text-2xl mr-2'>⭐</span>
-    <span className='text-xl font-bold'>{tmdb?.vote_average}</span>
+    <span className='text-yellow-400 text-lg mr-1'>⭐</span>
+    <span className='text-xl font-bold'>{tmdb?.vote_average.toFixed(1)}</span>
     <span className='text-gray-400 ml-2'>({tmdb?.vote_count} lượt)</span>
   </div>
 )

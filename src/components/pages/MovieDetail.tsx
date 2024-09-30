@@ -35,7 +35,7 @@ const MovieDetail = () => {
             <MoviePoster movieData={movieData} showEpisode={showEpisode} setShowEpisode={setShowEpisode} />
             <div className='md:w-2/3'>
               <MovieInfo movieData={movieData} />
-              <TrailerButton trailerUrl={movieData?.trailer_url} />
+              {movieData?.trailer_url && <TrailerButton trailerUrl={movieData?.trailer_url} />}
             </div>
           </div>
           {showEpisode && (
