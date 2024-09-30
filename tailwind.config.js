@@ -14,7 +14,7 @@ export default {
         blackoil: '#141414',
         layout: '#222438',
         container: '#191b2d',
-        header: '#181c3e',
+        header: '#433878',
         ghostWhite: '#F3F4F6',
         lightGhostWhite: '#e6e7eb',
         basicLime: '#b0e633',

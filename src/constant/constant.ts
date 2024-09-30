@@ -37,22 +37,22 @@ export const stripHtmlTags = (htmlString: string | undefined) => {
 
 export const typeData = [
   {
-    _id: 1,
+    _id: '1',
     name: 'Phim lẻ',
     slug: 'phim-le'
   },
   {
-    _id: 2,
+    _id: '2',
     name: 'Phim bộ',
     slug: 'phim-bo'
   },
   {
-    _id: 3,
+    _id: '3',
     name: 'Phim hoạt hình',
     slug: 'hoat-hinh'
   },
   {
-    _id: 4,
+    _id: '4',
     name: 'TV Shows',
     slug: 'tv-shows'
   }
@@ -82,17 +82,17 @@ export const yearOptions = generateYearOptions()
 
 export const sortOptions = [
   {
-    _id: 1,
+    _id: '1',
     name: 'Thời gian cập nhật',
     slug: 'modified.time'
   },
   {
-    _id: 2,
+    _id: '2',
     name: 'Năm sản xuất',
     slug: 'year'
   },
   {
-    _id: 3,
+    _id: '3',
     name: 'Lượt xem',
     slug: 'view'
   }

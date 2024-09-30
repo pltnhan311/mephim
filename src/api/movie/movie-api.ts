@@ -31,6 +31,11 @@ const movieApi = {
   getMovieSearch: async (keyword: string) => {
     const { data } = await axiosApi.get<MovieData>(`/tim-kiem?keyword=${keyword}`)
     return data || {}
+  },
+
+  getMovieFilter: async (filterType: string, filter: string) => {
+    const { data } = await axiosApi.get<MovieData>(`/${filterType}/${filter}`)
+    return data || {}
   }
 }
 

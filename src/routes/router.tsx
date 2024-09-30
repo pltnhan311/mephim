@@ -8,6 +8,7 @@ import SearchList from '~/components/pages/SearchList'
 import StreamingMovie from '~/components/pages/StreamingMovie'
 import SearchProvider from '~/context/SearchProvider'
 import ModalProvider from '~/context/ModalProvider'
+import MovieFilter from '~/components/pages/MovieFilter'
 
 const RootLayout = () => (
   <SearchProvider>
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
           {
             path: 'tim-kiem',
             element: <SearchList />
+          },
+          {
+            path: ':filterType/:filter',
+            element: <MovieFilter />
           }
         ]
       }

@@ -13,7 +13,7 @@ const SearchInput = () => {
           value={searchKeyword}
           onChange={(e) => onInputChange(e.target.value)}
           placeholder='Tìm kiếm tên phim, tv shows...'
-          className={`w-full rounded border border-gray-700 bg-blackoil/70 p-2 px-10 text-slate-200 placeholder-gray-400 outline-none transition-all duration-300 ${
+          className={`w-full font-light rounded border border-gray-700 bg-blackoil/70 p-2 px-10 text-slate-200 placeholder-gray-400 outline-none transition-all duration-300 ${
             isOpen ? 'opacity-80' : 'opacity-0'
           }`}
           onKeyDown={(e) => {
