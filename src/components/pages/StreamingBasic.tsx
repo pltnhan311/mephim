@@ -57,10 +57,14 @@ const StreamingBasic = () => {
                   width='100%'
                   height='100%'
                   controls
-                  playing
+                  playsinline={true}
                   config={{
                     file: {
-                      forceHLS: true
+                      forceHLS: false,
+                      attributes: {
+                        controlsList: 'nodownload',
+                        playsInline: true
+                      }
                     }
                   }}
                 />
