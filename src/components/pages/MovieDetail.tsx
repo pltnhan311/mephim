@@ -26,7 +26,7 @@ const MovieDetail = () => {
   if (isLoading) return <Loading />
 
   return (
-    <div className='px-4 py-8'>
+    <>
       <Breadcrumb breadCrumb={data?.breadCrumb || []} />
 
       <div className='flex flex-col xl:flex-row gap-5'>
@@ -47,21 +47,19 @@ const MovieDetail = () => {
           )}
           <WarningSection message='Phim bị lỗi thì bình luận bên dưới để ad fix hoặc qua nhóm tele:...' />
           <MovieContentSection movieData={movieData} />
-          <div className='-mx-4'>
-            <MediaList title='Có thể bạn sẽ thích' type='le' />
-          </div>
+          <MediaList title='Có thể bạn sẽ thích' type='le' />
         </div>
 
         <div className='w-full flex-1'>
           <Sidebar />
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
 const MovieContentSection: React.FC<{ movieData: MovieDetailSlug }> = ({ movieData }) => (
-  <div className='bg-[#27273e] p-4 rounded-md mt-5'>
+  <div className='bg-subModal p-4 rounded-md mt-5'>
     <div className='mb-5 !border-b !border-[#d5633d] w-fit'>
       <p className='font-extrabold capitalize whitespace-nowrap tracking-tight text-lg'>
         <span className='bg-gradient-to-r from-orange-400 to-pink-600 bg-clip-text text-transparent'>
@@ -74,7 +72,7 @@ const MovieContentSection: React.FC<{ movieData: MovieDetailSlug }> = ({ movieDa
 )
 
 const WarningSection = ({ message }: { message: string }) => (
-  <div className='mt-5 text-amber-400 text-sm flex items-center gap-3 bg-[#27273e] p-3 py-4 border-gray-700 mb-3 rounded'>
+  <div className='mt-5 text-yellow-500 text-sm flex items-center gap-3 bg-subModal p-3 py-4 border-gray-700 mb-3 rounded'>
     <FontAwesomeIcon icon={faWarning} />
     <p>{message}</p>
   </div>

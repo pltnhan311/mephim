@@ -30,7 +30,7 @@ const ModalProvider = ({ children }: { children: React.ReactNode }) => {
     <ModalContext.Provider value={{ openPopup }}>
       {children}
       {isShow && (
-        <div className='fixed inset-0 text-white'>
+        <div className='fixed inset-0'>
           <div
             className='absolute inset-0 flex items-center justify-center bg-black/70'
             onClick={() => setIsShow(false)}

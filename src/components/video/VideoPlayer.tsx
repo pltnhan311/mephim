@@ -93,29 +93,21 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
               <div className='flex items-center space-x-4'>
                 <button
                   onClick={handlePlayPause}
-                  className='text-white hover:text-blue-500'
+                  className='hover:text-blue-500'
                   aria-label={playing ? 'Pause' : 'Play'}
                 >
                   <FontAwesomeIcon icon={playing ? faPause : faPlay} />
                 </button>
-                <button
-                  onClick={handleBackward}
-                  className='text-white hover:text-blue-500'
-                  aria-label='Rewind 10 seconds'
-                >
+                <button onClick={handleBackward} className='hover:text-blue-500' aria-label='Rewind 10 seconds'>
                   <FontAwesomeIcon icon={faBackward} />
                 </button>
-                <button
-                  onClick={handleForward}
-                  className='text-white hover:text-blue-500'
-                  aria-label='Forward 10 seconds'
-                >
+                <button onClick={handleForward} className='hover:text-blue-500' aria-label='Forward 10 seconds'>
                   <FontAwesomeIcon icon={faForward} />
                 </button>
                 <div className='flex items-center space-x-2'>
                   <button
                     onClick={handleToggleMute}
-                    className='text-white hover:text-blue-500'
+                    className='hover:text-blue-500'
                     aria-label={muted ? 'Unmute' : 'Mute'}
                   >
                     <FontAwesomeIcon icon={muted ? faVolumeMute : faVolumeUp} />
@@ -138,7 +130,7 @@ const VideoPlayer: React.FC<VideoPlayerProps> = ({ url }) => {
               </div>
               <button
                 onClick={handleToggleFullscreen}
-                className='text-white hover:text-blue-500'
+                className='hover:text-blue-500'
                 aria-label={isFullscreen ? 'Exit fullscreen' : 'Enter fullscreen'}
               >
                 <FontAwesomeIcon icon={isFullscreen ? faCompress : faExpand} />

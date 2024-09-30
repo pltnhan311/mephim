@@ -33,39 +33,34 @@ const StreamingMovie: React.FC = () => {
   const posterUrl = `${APP_DOMAIN_CDN_IMAGE}/uploads/movies/${movieData.poster_url || movieData.thumb_url}`
 
   return (
-    <div className='bg-gray-900 text-white min-h-screen'>
-      <div className='container mx-auto px-4 py-8'>
-        <Breadcrumb breadCrumb={data?.breadCrumb || []} />
-
-        <div className='flex flex-col xl:flex-row gap-8 mt-2'>
-          <div className='w-full xl:w-[70%] mt-10'>
-            {showVideo ? (
-              <VideoPlayer url={currentEpisode?.link_m3u8 || ''} poster={posterUrl} />
-            ) : (
-              <PosterWithPlayButton posterUrl={posterUrl} onPlayClick={setShowVideo} />
-            )}
-            <MovieInfo movieData={movieData} />
-            <ToggleableContent
-              title='Nội dung phim'
-              content={<MovieContent movieData={movieData} />}
-              isOpen={showContent}
-              onToggle={setShowContent}
-            />
-            <MovieEpisode
-              movieData={movieData}
-              activeEpisode={activeEpisode || movieData?.episodes?.[0]?.server_data?.[0]?.name}
-              setActiveEpisode={setActiveEpisode}
-            />
-            <div className='-mx-4'>
-              <MediaList title='Có thể bạn sẽ thích' type='tv-shows' category='tv-shows' />
-            </div>
-          </div>
-          <div className='w-full xl:w-[30%] -mt-10'>
-            <Sidebar />
-          </div>
+    <>
+      <Breadcrumb breadCrumb={data?.breadCrumb || []} />
+      <div className='flex flex-col xl:flex-row gap-8 mt-2'>
+        <div className='w-full xl:w-[70%] mt-10'>
+          {showVideo ? (
+            <VideoPlayer url={currentEpisode?.link_m3u8 || ''} poster={posterUrl} />
+          ) : (
+            <PosterWithPlayButton posterUrl={posterUrl} onPlayClick={setShowVideo} />
+          )}
+          <MovieInfo movieData={movieData} />
+          <ToggleableContent
+            title='Nội dung phim'
+            content={<MovieContent movieData={movieData} />}
+            isOpen={showContent}
+            onToggle={setShowContent}
+          />
+          <MovieEpisode
+            movieData={movieData}
+            activeEpisode={activeEpisode || movieData?.episodes?.[0]?.server_data?.[0]?.name}
+            setActiveEpisode={setActiveEpisode}
+          />
+          <MediaList title='Có thể bạn sẽ thích' type='tv-shows' category='tv-shows' />
+        </div>
+        <div className='w-full xl:w-[30%] -mt-10'>
+          <Sidebar />
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
@@ -77,7 +72,7 @@ const ErrorMessage: React.FC = () => (
     <h2 className='text-2xl font-bold text-yellow-500 mb-2'>Rất tiếc, phim này hiện chưa có link xem 😭</h2>
     <p className='text-gray-400 mb-4'>Mong bạn thông cảm. Mời bạn xem phim khác.</p>
     <Link to='/'>
-      <button className='px-4 py-2 bg-gray-600/50 text-white rounded hover:bg-gray-600/70 transition duration-300'>
+      <button className='px-4 py-2 bg-gray-600/50 rounded hover:bg-gray-600/70 transition duration-300'>
         Xem phim khác
       </button>
     </Link>
@@ -95,7 +90,7 @@ const PosterWithPlayButton: React.FC<{ posterUrl: string; onPlayClick: () => voi
       <div className='absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center'>
         <button
           onClick={onPlayClick}
-          className='text-white text-6xl hover:text-blue-400 transition-colors'
+          className='text-6xl hover:text-blue-400 transition-colors'
           aria-label='Play video'
         >
           ▶

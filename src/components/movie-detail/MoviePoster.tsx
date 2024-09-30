@@ -34,9 +34,9 @@ const MoviePoster = ({ movieData, showEpisode, setShowEpisode }: MoviePosterProp
           <PosterButton
             icon={showEpisode ? faChevronUp : faChevronDown}
             text='Tập phim'
-            gradientFrom='from-emerald-600'
-            gradientTo='to-indigo-500'
-            shadowColor='#4eb2cbb8'
+            gradientFrom='from-blue-400'
+            gradientTo='to-indigo-600'
+            shadowColor='#734ecbb8'
             onClick={() => setShowEpisode(!showEpisode)}
           />
           <PosterButton
@@ -72,7 +72,7 @@ const PosterButton = ({ icon, text, gradientFrom, gradientTo, shadowColor, onCli
       onClick={onClick}
     >
       <FontAwesomeIcon icon={icon} className='mr-2' />
-      <p className='text-white font-light'>{text}</p>
+      <p className='font-light'>{text}</p>
     </button>
   )
 }

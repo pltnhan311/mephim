@@ -23,7 +23,7 @@ const TrailerButton = ({ trailerUrl }: TrailerButtonProps) => {
 
   return (
     <button
-      className='relative flex items-center bg-gradient-to-r from-lime-500 to-emerald-500 hover:from-emerald-500 hover:to-lime-400 text-white py-2 px-4 rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 shadow-lg hover:shadow-xl'
+      className='relative flex items-center bg-gradient-to-r from-lime-500 to-emerald-500 hover:from-emerald-500 hover:to-lime-400 py-2 px-4 rounded-full transition-all duration-300 ease-in-out transform hover:scale-105 shadow-lg hover:shadow-xl'
       onClick={handleClick}
     >
       <FontAwesomeIcon icon={faPlayCircle} className='mr-2' />

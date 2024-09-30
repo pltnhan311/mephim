@@ -6,17 +6,17 @@ interface MovieInfoProps {
 
 const MovieInfo = ({ movieData }: MovieInfoProps) => (
   <>
-    <h1 className='text-3xl font-bold mb-2'>{movieData?.name}</h1>
-    <p className='text-lg text-gray-400 mb-4'>{movieData?.origin_name}</p>
+    <p className='text-2xl font-medium mb-2'>{movieData?.name}</p>
+    <p className='text-gray-400 mb-4'>{movieData?.origin_name}</p>
 
-    <div className='grid grid-cols-2 gap-x-8 gap-y-2 mb-3 text-sm'>
+    <div className='grid grid-cols-2 gap-x-8 gap-y-4 mb-3 text-sm'>
       <InfoItem label='Năm' value={movieData?.year} />
       <InfoItem label='Thời lượng' value={movieData?.time} />
       <InfoItem label='Đang phát' value={movieData?.episode_current} />
       <InfoItem label='Tập mới nhất' value={movieData?.episode_total} />
       <InfoItem label='Quốc gia' value={movieData?.country?.map((item) => item.name).join(', ')} />
-      <InfoItem label='Thể loại' value={movieData?.category?.map((item) => item.name).join(', ')} />
       <InfoItem label='Chất lượng' value={`${movieData?.lang}+${movieData?.quality}`} />
+      <InfoItem label='Thể loại' value={movieData?.category?.map((item) => item.name).join(', ')} />
     </div>
 
     <ActorInfo actors={movieData?.actor} />
@@ -27,7 +27,8 @@ const MovieInfo = ({ movieData }: MovieInfoProps) => (
 
 const InfoItem = ({ label, value }: { label: string; value?: string | number }) => (
   <div>
-    <span className='text-gray-400'>{label}:</span> <span className='font-semibold'>{value}</span>
+    <span className='text-gray-400'>{label}: </span>
+    <span className='text-gray-200'>{value}</span>
   </div>
 )
 

@@ -21,7 +21,7 @@ const Sidebar = () => {
   ]
 
   return (
-    <div className='mt-10 text-[1vw] text-white'>
+    <div className='mt-10 text-[1vw]'>
       <div className='flex justify-between'>
         <div className='!border-b !border-[#1e2732] mb-3'>
           <button className='mb-1 flex flex-col sm:flex-row sm:items-center sm:justify-between'>
@@ -54,11 +54,7 @@ const Sidebar = () => {
       </div>
       <div className='flex flex-col gap-0.5'>
         {items?.slice(0, 13).map((item) => (
-          <Link
-            key={item._id}
-            to={`/chi-tiet/${item.slug}`}
-            className='block rounded-lg transition-colors duration-300 hover:bg-slate-700/50'
-          >
+          <Link key={item._id} to={`/chi-tiet/${item.slug}`} className='block rounded-lg'>
             <MovieListItem key={item._id} item={item} />
           </Link>
         ))}

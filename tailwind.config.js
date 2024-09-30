@@ -21,7 +21,8 @@ export default {
         basicIndigo: '#4338ca',
         lightIndigo: '#6366f1',
         darkIndigo: '#3730a3',
-        hoverIndigo: '#4338ca'
+        hoverIndigo: '#4338ca',
+        subModal: '#27273e'
       }
     }
   },
