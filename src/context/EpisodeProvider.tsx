@@ -1,5 +1,4 @@
 import React, { createContext, useState, useContext, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
 import { Episode, MovieDetailSlug } from '~/types/movie/movie-types'
 
 interface EpisodeContextType {
@@ -14,20 +13,19 @@ export const EpisodeProvider: React.FC<{ children: React.ReactNode; movieData: M
   children,
   movieData
 }) => {
-  const location = useLocation()
   const [activeEpisode, setActiveEpisode] = useState<string | null>(null)
   const episodes = movieData?.episodes?.[0]?.server_data
 
   const currentEpisode = React.useMemo(() => {
-    if (!episodes || !activeEpisode) return null
-    return episodes.find((ep) => ep.name === activeEpisode) || null
+    if (!episodes || !activeEpisode) return episodes?.[0] || null
+    return episodes.find((ep) => ep.name === activeEpisode) || episodes[0]
   }, [episodes, activeEpisode])
 
   useEffect(() => {
-    if (location.pathname.includes('chi-tiet')) {
-      setActiveEpisode(movieData?.episodes?.[0]?.server_data?.[0]?.name)
+    if (episodes && episodes.length > 0) {
+      setActiveEpisode(episodes[0].name)
     }
-  }, [location.pathname, movieData])
+  }, [episodes])
 
   return (
     <EpisodeContext.Provider value={{ activeEpisode, setActiveEpisode, currentEpisode }}>

@@ -5,10 +5,10 @@ const AppLayout = () => {
   return (
     <div>
       <Header />
-      <div className='bg-layout pt-16 text-ghostWhite'>
-        <div className='min-h-screen container px-2 sm:px-5 py-8 bg-container'>
-          <div className='rounded-t transition-all duration-300 ease-in-out hover:shadow-md bg-lightIndigo p-[5px] overflow-hidden text-center s mb-10'>
-            <p className='font-semibold sm:stext-[13px] text-xs text-blackoil'>
+      <div className='bg-layout pt-16 text-ghostWhite min-h-screen'>
+        <div className='container bg-contaseiner'>
+          <div className='rounded-t transition-all duration-300 ease-in-out hover:shadow-md bg-gray-700 p-[5px] sm:p-2 overflow-hidden text-center s mb-10'>
+            <p className='font-semibold sm:stext-[13px] text-xs text-yellow-500'>
               NẾU KHÔNG TẢI ĐƯỢC NỘI DUNG, HÃY BẤM F5 HOẶC TẢI LẠI TRANG 1 HOẶC 2 LẦN BẠN NHÉ .
             </p>
           </div>

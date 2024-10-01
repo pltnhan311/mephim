@@ -15,8 +15,8 @@ const MoviePoster = ({ movieData, showEpisode, setShowEpisode }: MoviePosterProp
   const navigate = useNavigate()
 
   return (
-    <div className='md:w-1/3'>
-      <div className='relative'>
+    <div className='w-full md:w-1/3 px-4 md:px-0'>
+      <div className='relative max-w-[90%] mx-auto md:max-w-none'>
         <LazyLoadImage
           src={
             movieData?.thumb_url

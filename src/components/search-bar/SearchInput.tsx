@@ -6,7 +6,7 @@ import { useSearchContext } from '~/context/SearchProvider'
 const SearchInput = () => {
   const { isOpen, searchKeyword, onInputChange, onToggle, onClear, onSearch } = useSearchContext()
   return (
-    <div className={`transition-all duration-300 ease-in-out ${isOpen ? 'w-96' : 'w-10'}`}>
+    <div className={`transition-all duration-300 ease-in-out ${isOpen ? 'w-64 md:w-96' : 'w-10'}`}>
       <div className='relative flex items-center'>
         <input
           type='text'

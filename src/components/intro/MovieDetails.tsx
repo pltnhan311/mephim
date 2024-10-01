@@ -14,10 +14,10 @@ const MovieDetails: React.FC<MovieDetailsProps> = ({ item, data }) => (
       {item.origin_name}
     </h2>
     <h2 className='mb-4 md:mb-6 max-w-2xl text-sm md:text-xl lg:text-2xl font-medium md:font-bold'>{item.name}</h2>
-    <MovieActions data={data} />
     <div className='hidden md:flex'>
       <MovieInfo item={item} data={data} />
     </div>
+    <MovieActions data={data} />
   </div>
 )
 
