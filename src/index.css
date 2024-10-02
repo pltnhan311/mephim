@@ -18,7 +18,7 @@
   }
 
   * ::-webkit-scrollbar-track {
-    @apply bg-[#1a1c3b]; /* Using the layout color (#222438) for the track */
+    @apply bg-[#171520]; /* Using the layout color (#222438) for the track */
   }
 
   * ::-webkit-scrollbar-thumb {
@@ -29,6 +29,19 @@
     @apply bg-[#3e3379]; /* Using the header color (#181c3e) for the thumb on hover */
   }
 
+  /* Customize scroll bar */
+  * ::-webkit-scrollbar {
+    @apply w-4;
+  }
+
+  * ::-webkit-scrollbar-thumb {
+    @apply h-14 rounded-lg border-4 border-solid border-transparent bg-[rgba(96,96,96,0.5)] bg-clip-content;
+  }
+
+  * ::-webkit-scrollbar-thumb:hover {
+    @apply bg-[#606060];
+  }
+
   strong,
   strong * {
     @apply font-medium;
@@ -37,6 +50,6 @@
 
 @layer components {
   .container {
-    @apply mx-auto max-w-screen-xl px-4 sm:px-5 py-8;
+    @apply mx-auto max-w-[1400px] px-4 sm:px-5 py-8;
   }
 }
