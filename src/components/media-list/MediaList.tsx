@@ -10,41 +10,58 @@ import 'swiper/css/pagination'
 import './style.css'
 import { useTvShows } from '~/api/tv-shows/use-tv-shows'
 import MovieCardSkeleton from '~/components/MovieCardSkeleton'
+import Loading from '~/components/Loading'
+import { Link } from 'react-router-dom'
 
 const MediaList = ({
   title,
-  type,
+  movieType,
+  tvShowType,
   swiper,
   category,
   filters,
-  searchDataList
+  searchDataList,
+  isLoading,
+  currentPage
 }: {
   title: string
-  type?: string
+  movieType?: string
+  tvShowType?: string
   swiper?: boolean
   category?: string
   filters?: Record<string, string>
   searchDataList?: MovieItem[]
+  isLoading?: boolean
+  currentPage?: number
 }) => {
   // const [activeTabId, setActiveTabId] = useState(tabs[0]?.id)
   const { data: movieData } = useMovies({
-    type: type || '',
+    type: movieType || '',
     category: filters?.category,
     country: filters?.country,
     year: filters?.year,
     sort_field: filters?.sort_field,
-    page: Number(filters?.page)
+    page: Number(currentPage)
   })
-  const { data: tvShowData } = useTvShows(type || '')
+  const { data: tvShowData } = useTvShows({
+    type: tvShowType || '',
+    category: filters?.category,
+    country: filters?.country,
+    year: filters?.year,
+    sort_field: filters?.sort_field,
+    page: Number(currentPage)
+  })
 
-  const data = category ? tvShowData : movieData
+  const data = category || tvShowType ? tvShowData : movieData
 
-  const mediaList: MovieItem[] = useMemo(() => data?.items.slice(0, 12) || [], [data])
+  const mediaList: MovieItem[] = useMemo(() => data?.items.slice(0, 200) || [], [data])
+
+  if (isLoading) return <Loading />
 
   return (
     <div className='mt-10'>
-      <div className='!border-b !border-[#1e2732] mb-3'>
-        <button className='mb-1 flex flex-col sm:flex-row sm:items-center sm:justify-between'>
+      <div className='!border-b !border-[#1e2732] mb-3 flex justify-between'>
+        <div className='mb-1 flex flex-col sm:flex-row sm:items-center sm:justify-between'>
           <div className='!border-b !border-[#d5633d] -mb-1'>
             <p className='font-extrabold capitalize whitespace-nowrap tracking-tight text-lg'>
               <span className='bg-gradient-to-r from-orange-400 to-pink-600 bg-clip-text text-transparent'>
@@ -52,7 +69,18 @@ const MediaList = ({
               </span>
             </p>
           </div>
-        </button>
+        </div>
+        <div className='mb-1 flex flex-col sm:flex-row sm:items-center sm:justify-between'>
+          <Link to={!data?.type_list.startsWith('phim') ? `/list/phim-${movieType}` : `/list/${tvShowType}`}>
+            <div className='bg-gray-600/50 px-10 py-1 rounded-full'>
+              <p className='font-medium capitalize whitespace-nowrap tracking-wide'>
+                <span className='bg-gradient-to-r from-cyan-500 to-green-400 bg-clip-text text-transparent'>
+                  Xem tất cả
+                </span>
+              </p>
+            </div>
+          </Link>
+        </div>
       </div>
 
       {!swiper ? (

@@ -1,5 +1,9 @@
+import { TvShowParams } from './use-tv-shows'
+
 const tvShowsKeys = {
-  tvShowsList: (type: string, sort_field?: string) => ['tvShowsList', type, sort_field]
+  all: ['tvShows'] as const,
+  lists: () => [...tvShowsKeys.all, 'list'] as const,
+  tvShowsList: (params: TvShowParams) => [...tvShowsKeys.lists(), params] as const
 }
 
 export default tvShowsKeys

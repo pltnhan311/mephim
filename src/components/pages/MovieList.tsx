@@ -1,26 +1,41 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useFilterGenre, useFilterCountry } from '~/api/filter/use-filter'
 import { useMovies } from '~/api/movie/use-movies'
 import Breadcrumb from '~/components/Breadcrumb'
 import FilterPanel from '~/components/FilterPanel'
 import MediaList from '~/components/media-list/MediaList'
+import Pagination from '~/components/Pagination'
 import Sidebar from '~/components/sidebar/Sidebar'
 import { sortOptions, typeData, yearOptions } from '~/constant/constant'
 import { IFilterCountryItem, IFilterGenreItem } from '~/types/filter/filter-types'
+import { MovieData } from '~/types/movie/movie-types'
 
-const MovieList: React.FC = () => {
+interface MovieListProps {
+  movieData: MovieData
+}
+
+const MovieList: React.FC<MovieListProps> = () => {
+  const [currentPage, setCurrentPage] = useState(1)
   const { type } = useParams<{ type: string }>()
+  const [selectedFilters, setSelectedFilters] = useState<Record<string, string>>({})
+  const [tempFilters, setTempFilters] = useState<Record<string, string>>({})
+
   const shortType = type?.split('-')[1] || ''
-  const { data: movieData } = useMovies({ type: shortType })
+  const {
+    data: movieData,
+    isLoading,
+    isFetching
+  } = useMovies({ type: shortType, page: currentPage, ...selectedFilters })
   const { data: genreData } = useFilterGenre()
   const { data: countryData } = useFilterCountry()
 
-  const [tempFilters, setTempFilters] = useState<Record<string, string>>({})
-  const [selectedFilters, setSelectedFilters] = useState<Record<string, string>>({})
-
   const genres: IFilterGenreItem[] = useMemo(() => genreData?.items || [], [genreData])
   const countries: IFilterCountryItem[] = useMemo(() => countryData?.items || [], [countryData])
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page)
+  }
 
   const filtersPanel = useMemo(() => {
     return [
@@ -38,11 +53,19 @@ const MovieList: React.FC = () => {
 
   const handleApplyFilters = () => {
     setSelectedFilters(tempFilters)
+    setCurrentPage(1)
   }
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }, [currentPage, selectedFilters])
 
   return (
     <div className='text-slate-200 flex flex-col'>
-      <div className='px-4 shadow-sm'>
+      <div className='mb-4'>
         <FilterPanel
           filtersPanel={filtersPanel}
           tempFilters={tempFilters}
@@ -52,13 +75,33 @@ const MovieList: React.FC = () => {
         <Breadcrumb breadCrumb={movieData?.breadCrumb || []} />
       </div>
 
-      <div className='flex flex-col lg:flex-row -mt-7'>
+      <div className='flex flex-col lg:flex-row gap-5 -mt-7'>
         <div className='w-full flex-[2.4]'>
-          <MediaList title={`Phim ${shortType}`} type={shortType as string} filters={selectedFilters} />
+          <MediaList
+            title={`Phim ${shortType}`}
+            movieType={shortType as string}
+            tvShowType={type}
+            filters={selectedFilters}
+            isLoading={isLoading || isFetching}
+            currentPage={currentPage}
+          />
         </div>
         <div className='w-full flex-1'>
           <Sidebar />
         </div>
+      </div>
+
+      <div>
+        <Pagination
+          {...(movieData?.params?.pagination || {
+            totalItems: 0,
+            totalItemsPerPage: 0,
+            currentPage: 0,
+            pageRanges: 0
+          })}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   )

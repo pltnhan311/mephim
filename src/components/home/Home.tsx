@@ -6,13 +6,13 @@ const Home = () => {
   return (
     <div className='bg-container'>
       <FeatureMovie />
-      <MediaList title='Phim mới' type='sap-chieu' swiper={true} />
+      <MediaList title='Phim mới' movieType='sap-chieu' swiper={true} />
       <div className='flex flex-col lg:flex-row gap-5'>
         <div className='w-full flex-[2]'>
-          <MediaList title='Phim lẻ' type='le' />
-          <MediaList title='Phim bộ' type='bo' />
-          <MediaList title='TV Shows' type='tv-shows' category='tv-shows' />
-          <MediaList title='Hoạt hình' type='hoat-hinh' category='hoat-hinh' />
+          <MediaList title='Phim lẻ' movieType='le' />
+          <MediaList title='Phim bộ' movieType='bo' />
+          <MediaList title='TV Shows' tvShowType='tv-shows' category='tv-shows' />
+          <MediaList title='Hoạt hình' tvShowType='hoat-hinh' category='hoat-hinh' />
         </div>
         <div className='w-full flex-1'>
           <Sidebar />

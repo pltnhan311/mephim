@@ -47,7 +47,7 @@ const MovieDetail = () => {
           )}
           <WarningSection message='Phim bị lỗi thì bình luận bên dưới để ad fix hoặc qua nhóm tele:...' />
           <MovieContentSection movieData={movieData} />
-          <MediaList title='Có thể bạn sẽ thích' type='le' />
+          <MediaList title='Có thể bạn sẽ thích' movieType='le' />
         </div>
 
         <div className='w-full flex-1'>
