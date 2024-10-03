@@ -1,3 +1,4 @@
+import React from 'react'
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useMovies } from '~/api/movie/use-movies'
@@ -63,4 +64,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar
+export default React.memo(Sidebar)

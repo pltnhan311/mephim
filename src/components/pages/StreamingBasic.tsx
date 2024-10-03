@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import ReactPlayer from 'react-player'
 import { useMovie } from '~/api/movie/use-movie'
@@ -25,7 +25,7 @@ const StreamingBasic = () => {
 
   const { activeEpisode, setActiveEpisode, currentEpisode } = useEpisodeContext()
 
-  const handlePlayClick = () => setShowVideo(true)
+  const handlePlayClick = useCallback(() => setShowVideo(true), [setShowVideo])
 
   if (isLoading) return <Loading />
   if (!movieData || !movieData.episodes?.[0]?.server_data?.[0]?.link_m3u8) {

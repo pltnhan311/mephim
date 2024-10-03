@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react'
+import { useCallback, useRef, useEffect, useState } from 'react'
 import { faChevronDown, faChevronUp, faUser, faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
@@ -29,10 +29,13 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useToggle(false)
   const sidebarRef = useRef<HTMLDivElement>(null)
 
-  const handleModalToggle = (type: 'genre' | 'country') => {
-    setModalType(type)
-    setShowModal()
-  }
+  const handleModalToggle = useCallback(
+    (type: 'genre' | 'country') => {
+      setModalType(type)
+      setShowModal()
+    },
+    [setModalType, setShowModal]
+  )
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

@@ -2,6 +2,7 @@ import { APP_DOMAIN_CDN_IMAGE } from '~/constant/constant'
 import { MovieItem } from '~/types/movie/movie-types'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import 'react-lazy-load-image-component/src/effects/blur.css'
+import React from 'react'
 
 const MovieListItem = ({ item }: { item: MovieItem }) => {
   const {
@@ -50,4 +51,4 @@ const MovieListItem = ({ item }: { item: MovieItem }) => {
   )
 }
 
-export default MovieListItem
+export default React.memo(MovieListItem)

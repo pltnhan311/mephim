@@ -4,11 +4,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import { APP_DOMAIN_CDN_IMAGE } from '~/constant/constant'
 import { MovieItem } from '~/types/movie/movie-types'
 
-interface MovieCardProps {
-  media: MovieItem
-}
-
-const MovieCard: React.FC<MovieCardProps> = ({ media }) => {
+const MovieCard = React.memo(({ media }: { media: MovieItem }) => {
   const { poster_url, thumb_url, origin_name, name, lang, quality, episode_current, slug } = media
 
   return (
@@ -22,7 +18,7 @@ const MovieCard: React.FC<MovieCardProps> = ({ media }) => {
       <EpisodeBadge episode_current={episode_current} />
     </Link>
   )
-}
+})
 
 const MovieImage: React.FC<{ poster_url: string; thumb_url: string; name: string }> = ({
   poster_url,

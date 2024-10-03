@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import React, { useMemo } from 'react'
 import { useMovies } from '~/api/movie/use-movies'
 import MovieCard from '~/components/MovieCard'
 import { MovieItem } from '~/types/movie/movie-types'
@@ -13,6 +13,17 @@ import MovieCardSkeleton from '~/components/MovieCardSkeleton'
 import Loading from '~/components/Loading'
 import { Link, useParams } from 'react-router-dom'
 
+interface MediaListProps {
+  title: string
+  mediaType?: string
+  swiper?: boolean
+  category?: string
+  filters?: Record<string, string>
+  searchDataList?: MovieItem[]
+  isLoading?: boolean
+  currentPage?: number
+}
+
 const MediaList = ({
   title,
   mediaType,
@@ -22,18 +33,7 @@ const MediaList = ({
   searchDataList,
   isLoading,
   currentPage
-}: {
-  title: string
-  mediaType?: string
-  swiper?: boolean
-  category?: string
-  filters?: Record<string, string>
-  searchDataList?: MovieItem[]
-  isLoading?: boolean
-  currentPage?: number
-}) => {
-  // const [activeTabId, setActiveTabId] = useState(tabs[0]?.id)
-
+}: MediaListProps) => {
   const { type } = useParams()
   const { data: movieData } = useMovies({
     type: type || mediaType || '',
@@ -133,4 +133,4 @@ const MediaList = ({
   )
 }
 
-export default MediaList
+export default React.memo(MediaList)

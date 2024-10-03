@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useFilterGenre, useFilterCountry } from '~/api/filter/use-filter'
 import { useMovies } from '~/api/movie/use-movies'
@@ -28,9 +28,12 @@ const MovieList = () => {
   const genres: IFilterGenreItem[] = useMemo(() => genreData?.items || [], [genreData])
   const countries: IFilterCountryItem[] = useMemo(() => countryData?.items || [], [countryData])
 
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page)
-  }
+  const handlePageChange = useCallback(
+    (page: number) => {
+      setCurrentPage(page)
+    },
+    [setCurrentPage]
+  )
 
   const filtersPanel = useMemo(() => {
     return [
@@ -42,14 +45,17 @@ const MovieList = () => {
     ]
   }, [genres, countries])
 
-  const handleFilterChange = (key: string, value: string) => {
-    setTempFilters((prev) => ({ ...prev, [key]: value }))
-  }
+  const handleFilterChange = useCallback(
+    (key: string, value: string) => {
+      setTempFilters((prev) => ({ ...prev, [key]: value }))
+    },
+    [setTempFilters]
+  )
 
-  const handleApplyFilters = () => {
+  const handleApplyFilters = useCallback(() => {
     setSelectedFilters(tempFilters)
     setCurrentPage(1)
-  }
+  }, [setSelectedFilters, setCurrentPage, tempFilters])
 
   useEffect(() => {
     window.scrollTo({

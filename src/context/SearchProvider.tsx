@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useRef, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useDebounce } from 'use-debounce'
 import { useSearch } from '~/api/movie/use-search'
@@ -47,30 +47,37 @@ const SearchProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [data])
 
-  const onToggle = () => {
+  const onToggle = useCallback(() => {
     setIsOpen(!isOpen)
-  }
+  }, [isOpen])
 
-  const onInputChange = (value: string) => {
-    setSearchKeyword(value)
-    if (value.trim() === '') {
-      setResults(null)
-    }
-  }
+  const onInputChange = useCallback(
+    (value: string) => {
+      setSearchKeyword(value)
+      if (value.trim() === '') {
+        setResults(null)
+      }
+    },
+    [setSearchKeyword, setResults]
+  )
 
-  const onClear = () => {
+  const onClear = useCallback(() => {
     setSearchKeyword('')
-  }
+    setResults(null)
+  }, [setSearchKeyword, setResults])
 
-  const onSearch = (value: string) => {
-    if (value.trim() !== '') {
-      setSearchParams({ keyword: value })
-      navigate(`/tim-kiem?keyword=${encodeURIComponent(value)}`)
-    } else {
-      setSearchParams({})
-      navigate('/')
-    }
-  }
+  const onSearch = useCallback(
+    (value: string) => {
+      if (value.trim() !== '') {
+        setSearchParams({ keyword: value })
+        navigate(`/tim-kiem?keyword=${encodeURIComponent(value)}`)
+      } else {
+        setSearchParams({})
+        navigate('/')
+      }
+    },
+    [setSearchParams, navigate]
+  )
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
