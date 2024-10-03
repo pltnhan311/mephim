@@ -15,6 +15,13 @@ import MovieContent from '~/components/movie-detail/MovieContent'
 import useToggle from '~/custom-hook/use-toggle'
 import { MovieDetailSlug } from '~/types/movie/movie-types'
 
+const MEDIA_TYPES = {
+  single: 'phim-le',
+  tvshows: 'tv-shows',
+  series: 'phim-bo',
+  hoathinh: 'hoat-hinh'
+}
+
 const MovieDetail = () => {
   const { movieSlug } = useParams()
   const { data, isLoading } = useMovie(movieSlug || '')
@@ -47,7 +54,7 @@ const MovieDetail = () => {
           )}
           <WarningSection message='Phim bị lỗi thì bình luận bên dưới để ad fix hoặc qua nhóm tele:...' />
           <MovieContentSection movieData={movieData} />
-          <MediaList title='Có thể bạn sẽ thích' movieType='le' />
+          <MediaList title='Có thể bạn sẽ thích' mediaType={MEDIA_TYPES[movieData?.type as keyof typeof MEDIA_TYPES]} />
         </div>
 
         <div className='w-full flex-1'>

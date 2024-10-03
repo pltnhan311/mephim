@@ -9,13 +9,8 @@ import Pagination from '~/components/Pagination'
 import Sidebar from '~/components/sidebar/Sidebar'
 import { sortOptions, typeData, yearOptions } from '~/constant/constant'
 import { IFilterCountryItem, IFilterGenreItem } from '~/types/filter/filter-types'
-import { MovieData } from '~/types/movie/movie-types'
 
-interface MovieListProps {
-  movieData: MovieData
-}
-
-const MovieList: React.FC<MovieListProps> = () => {
+const MovieList = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const { type } = useParams<{ type: string }>()
   const [selectedFilters, setSelectedFilters] = useState<Record<string, string>>({})
@@ -79,8 +74,6 @@ const MovieList: React.FC<MovieListProps> = () => {
         <div className='w-full flex-[2.4]'>
           <MediaList
             title={`Phim ${shortType}`}
-            movieType={shortType as string}
-            tvShowType={type}
             filters={selectedFilters}
             isLoading={isLoading || isFetching}
             currentPage={currentPage}

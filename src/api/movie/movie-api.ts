@@ -19,7 +19,7 @@ const movieApi = {
       page: page.toString()
     }).toString()
 
-    const { data } = await axiosApi.get<MovieData>(`/danh-sach/phim-${type}?${queryParams}`)
+    const { data } = await axiosApi.get<MovieData>(`/danh-sach/${type}?${queryParams}`)
     return data || {}
   },
 

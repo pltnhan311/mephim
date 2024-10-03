@@ -11,12 +11,11 @@ import './style.css'
 import { useTvShows } from '~/api/tv-shows/use-tv-shows'
 import MovieCardSkeleton from '~/components/MovieCardSkeleton'
 import Loading from '~/components/Loading'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 
 const MediaList = ({
   title,
-  movieType,
-  tvShowType,
+  mediaType,
   swiper,
   category,
   filters,
@@ -25,8 +24,7 @@ const MediaList = ({
   currentPage
 }: {
   title: string
-  movieType?: string
-  tvShowType?: string
+  mediaType?: string
   swiper?: boolean
   category?: string
   filters?: Record<string, string>
@@ -35,8 +33,10 @@ const MediaList = ({
   currentPage?: number
 }) => {
   // const [activeTabId, setActiveTabId] = useState(tabs[0]?.id)
+
+  const { type } = useParams()
   const { data: movieData } = useMovies({
-    type: movieType || '',
+    type: type || mediaType || '',
     category: filters?.category,
     country: filters?.country,
     year: filters?.year,
@@ -44,7 +44,7 @@ const MediaList = ({
     page: Number(currentPage)
   })
   const { data: tvShowData } = useTvShows({
-    type: tvShowType || '',
+    type: type || mediaType || '',
     category: filters?.category,
     country: filters?.country,
     year: filters?.year,
@@ -52,7 +52,7 @@ const MediaList = ({
     page: Number(currentPage)
   })
 
-  const data = category || tvShowType ? tvShowData : movieData
+  const data = category ? tvShowData : movieData
 
   const mediaList: MovieItem[] = useMemo(() => data?.items.slice(0, 200) || [], [data])
 
@@ -71,7 +71,7 @@ const MediaList = ({
           </div>
         </div>
         <div className='mb-1 flex flex-col sm:flex-row sm:items-center sm:justify-between'>
-          <Link to={!data?.type_list.startsWith('phim') ? `/list/phim-${movieType}` : `/list/${tvShowType}`}>
+          <Link to={`/list/${type || mediaType}`}>
             <div className='bg-gray-600/50 px-10 py-1 rounded-full'>
               <p className='font-medium capitalize whitespace-nowrap tracking-wide'>
                 <span className='bg-gradient-to-r from-cyan-500 to-green-400 bg-clip-text text-transparent'>

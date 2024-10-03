@@ -92,7 +92,7 @@ const StreamingBasic = () => {
             activeEpisode={activeEpisode || movieData?.episodes?.[0]?.server_data?.[0]?.name}
             setActiveEpisode={setActiveEpisode}
           />
-          <MediaList title='Có thể bạn sẽ thích' type='tv-shows' category='tv-shows' />
+          <MediaList title='Có thể bạn sẽ thích' mediaType={movieData?.type === 'phim-le' ? 'phim-le' : 'tv-shows'} />
         </div>
         <div className='w-full xl:w-[30%] -mt-10'>
           <Sidebar />

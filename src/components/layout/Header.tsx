@@ -126,7 +126,7 @@ const Header = () => {
           </div>
           <button
             className='lg:hidden text-gray-200 hover:text-white transition-colors z-[52]'
-            onClick={() => setIsMobileMenuOpen()}
+            onClick={setIsMobileMenuOpen}
           >
             <FontAwesomeIcon icon={faBars} size='lg' />
           </button>
