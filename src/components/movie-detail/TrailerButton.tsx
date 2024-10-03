@@ -12,12 +12,9 @@ const TrailerButton = ({ trailerUrl }: TrailerButtonProps) => {
 
   const handleClick = () => {
     openPopup(
-      <iframe
-        title='Trailer'
-        src={getYouTubeEmbedUrl(trailerUrl)}
-        className='aspect-video w-full max-w-4xl'
-        allowFullScreen
-      />
+      <div className='w-[70vw] h-[70vh] max-w-4xl max-h-[90vh]'>
+        <iframe title='Trailer' src={getYouTubeEmbedUrl(trailerUrl)} className='w-full h-full' allowFullScreen />
+      </div>
     )
   }
 

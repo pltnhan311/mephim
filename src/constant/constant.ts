@@ -1,3 +1,14 @@
+import {
+  faCog,
+  faFilm,
+  faGlobe,
+  faHome,
+  faSignOutAlt,
+  faTheaterMasks,
+  faTv,
+  faUser
+} from '@fortawesome/free-solid-svg-icons'
+
 export const APP_DOMAIN_CDN_IMAGE = 'https://img.ophim.live'
 
 export const APP_DOMAIN_FRONTEND = 'https://ophim17.cc'
@@ -96,4 +107,20 @@ export const sortOptions = [
     name: 'Lượt xem',
     slug: 'view'
   }
+]
+
+export const navItems = [
+  { to: '/', label: 'Trang chủ', icon: faHome },
+  { to: '/list/phim-le', label: 'Phim lẻ', icon: faFilm },
+  { to: '/list/phim-bo', label: 'Phim bộ', icon: faTv },
+  { to: '/list/tv-shows', label: 'TV Shows', icon: faTv },
+  { to: '/list/hoat-hinh', label: 'Hoạt hình', icon: faTheaterMasks },
+  { to: '/list/the-loai', label: 'Thể loại', icon: faFilm },
+  { to: '/list/quoc-gia', label: 'Quốc gia', icon: faGlobe }
+]
+
+export const userMenuItems = [
+  { to: '/profile', label: 'Tài khoản', icon: faUser },
+  { to: '/settings', label: 'Cài đặt', icon: faCog },
+  { to: '/logout', label: 'Đăng xuất', icon: faSignOutAlt }
 ]

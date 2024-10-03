@@ -40,9 +40,9 @@ const Sidebar = () => {
             <li key={tab.id} className='m-0.5'>
               <button
                 onClick={() => setActiveTabId(tab.id)}
-                className={`flex items-center justify-center rounded-sm text-xs px-2 py-1.5 transition-all duration-300 border border-white/10 ${
+                className={`flex items-center justify-center rounded text-xs px-2 py-1.5 transition-all duration-300 border border-white/10 ${
                   activeTabId === tab.id
-                    ? 'bg-gradient-to-r from-orange-500 to-pink-600 shadow-lg'
+                    ? 'bg-gradient-to-r from-cyan-500 text-white to-green-500 shadow-lg'
                     : 'text-gray-400 hover:bg-white/10 hover:text-white'
                 }`}
               >

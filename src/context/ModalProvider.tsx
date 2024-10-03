@@ -1,3 +1,5 @@
+import { faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 interface ModalContextType {
@@ -26,17 +28,29 @@ const ModalProvider = ({ children }: { children: React.ReactNode }) => {
     setIsShow(true)
     setContent(content)
   }
+
+  const closePopup = () => {
+    setIsShow(false)
+  }
+
   return (
     <ModalContext.Provider value={{ openPopup }}>
       {children}
       {isShow && (
-        <div className='fixed inset-0'>
-          <div
-            className='absolute inset-0 flex items-center justify-center bg-black/70'
-            onClick={() => setIsShow(false)}
-          >
-            {content}
+        <div className='fixed inset-0 z-50'>
+          <div className='absolute inset-0 bg-black/80 flex items-center justify-center' onClick={closePopup}>
+            <div className='relative z-10' onClick={(e) => e.stopPropagation()}>
+              {content}
+              <button
+                className='absolute -top-4 -right-4 text-white hover:text-gray-300'
+                onClick={closePopup}
+                aria-label='Close modal'
+              >
+                <FontAwesomeIcon icon={faXmarkCircle} size='2xl' />
+              </button>
+            </div>
           </div>
+          <div></div>
         </div>
       )}
     </ModalContext.Provider>

@@ -135,7 +135,7 @@ const MovieInfoWithToggleableContent: React.FC<{
 )
 
 const ErrorMessage: React.FC = () => (
-  <div className='flex flex-col items-center justify-center bg-gray-900'>
+  <div className='flex flex-col items-center justify-center bg-container'>
     <div className='text-4xl text-yellow-500 mb-4'>
       <FontAwesomeIcon icon={faExclamationTriangle} />
     </div>

@@ -1,24 +1,17 @@
 import { useState, useRef, useEffect } from 'react'
-import {
-  faChevronDown,
-  faChevronUp,
-  faUser,
-  faBars,
-  faHome,
-  faFilm,
-  faTv,
-  faTheaterMasks,
-  faGlobe,
-  faCog,
-  faSignOutAlt
-} from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faChevronUp, faUser, faBars } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Link } from 'react-router-dom'
 import { useFilterCountry, useFilterGenre } from '~/api/filter/use-filter'
 import SearchBar from '~/components/search-bar/SearchBar'
 import { motion, AnimatePresence } from 'framer-motion'
 import useToggle from '~/custom-hook/use-toggle'
-import Sidebar from './Sidebar'
+import { navItems, userMenuItems } from '~/constant/constant'
+import Navbar from '~/components/layout/Navbar'
+
+interface HeaderProps {
+  onMenuClick: () => void
+}
 
 const NavLink = ({ to, children }: { to: string; children: React.ReactNode }) => (
   <Link to={to} className='transition-colors hover:text-basicLime duration-300'>
@@ -26,7 +19,7 @@ const NavLink = ({ to, children }: { to: string; children: React.ReactNode }) =>
   </Link>
 )
 
-const Header = () => {
+const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
   const [showModal, setShowModal] = useToggle(false)
   const [modalType, setModalType] = useState<'genre' | 'country'>('genre')
   const { data: genre } = useFilterGenre()
@@ -35,22 +28,6 @@ const Header = () => {
   const countryButtonRef = useRef<HTMLButtonElement>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useToggle(false)
   const sidebarRef = useRef<HTMLDivElement>(null)
-
-  const navItems = [
-    { to: '/', label: 'Trang chủ', icon: faHome },
-    { to: '/list/phim-le', label: 'Phim lẻ', icon: faFilm },
-    { to: '/list/phim-bo', label: 'Phim bộ', icon: faTv },
-    { to: '/list/tv-shows', label: 'TV Shows', icon: faTv },
-    { to: '/list/hoat-hinh', label: 'Hoạt hình', icon: faTheaterMasks },
-    { to: '/list/the-loai', label: 'Thể loại', icon: faFilm },
-    { to: '/list/quoc-gia', label: 'Quốc gia', icon: faGlobe }
-  ]
-
-  const userMenuItems = [
-    { to: '/profile', label: 'Tài khoản', icon: faUser },
-    { to: '/settings', label: 'Cài đặt', icon: faCog },
-    { to: '/logout', label: 'Đăng xuất', icon: faSignOutAlt }
-  ]
 
   const handleModalToggle = (type: 'genre' | 'country') => {
     setModalType(type)
@@ -124,10 +101,7 @@ const Header = () => {
               ))}
             </div>
           </div>
-          <button
-            className='lg:hidden text-gray-200 hover:text-white transition-colors z-[52]'
-            onClick={setIsMobileMenuOpen}
-          >
+          <button className='lg:hidden text-gray-200 hover:text-white transition-colors z-[52]' onClick={onMenuClick}>
             <FontAwesomeIcon icon={faBars} size='lg' />
           </button>
         </div>
@@ -141,9 +115,9 @@ const Header = () => {
             animate='visible'
             exit='hidden'
             variants={fadeInVariants}
-            className='fixed inset-0 bg-black bg-opacity-50 z-[60]'
+            className='fixed inset-0 bg-black bg-opacity-50 z-[9999]'
           >
-            <Sidebar
+            <Navbar
               isOpen={isMobileMenuOpen}
               onClose={setIsMobileMenuOpen}
               navItems={navItems}

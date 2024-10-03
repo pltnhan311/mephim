@@ -72,11 +72,10 @@ const MediaList = ({
         </div>
         <div className='mb-1 flex flex-col sm:flex-row sm:items-center sm:justify-between'>
           <Link to={`/list/${type || mediaType}`}>
-            <div className='bg-gray-600/50 px-10 py-1 rounded-full'>
-              <p className='font-medium capitalize whitespace-nowrap tracking-wide'>
-                <span className='bg-gradient-to-r from-cyan-500 to-green-400 bg-clip-text text-transparent'>
-                  Xem tất cả
-                </span>
+            <div className='group relative overflow-hidden bg-gradient-to-r from-orange-500 to-yellow-400/20 px-8 py-1 rounded-full transition-all duration-300 hover:shadow-lg hover:shadow-orange-600/30 mb-0.5'>
+              <span className='absolute inset-0 bg-white mix-blend-overlay opacity-0 transition-opacity duration-300 group-hover:opacity-20'></span>
+              <p className='font-light text-sm capitalize whitespace-nowrap tracking-wide text-white relative z-10'>
+                Xem thêm
               </p>
             </div>
           </Link>
