@@ -126,7 +126,7 @@ const MovieList = () => {
 
       <div className='flex flex-col lg:flex-row -mt-7'>
         <div className='w-full flex-[2.4]'>
-          <MediaList title={`Phim ${shortType}`} type={shortType as string} filters={selectedFilters} />
+          <MediaList title={`Phim ${shortType}`} mediaType={shortType as string} filters={selectedFilters} />
         </div>
         <div className='w-full flex-1'>
           <Sidebar />
