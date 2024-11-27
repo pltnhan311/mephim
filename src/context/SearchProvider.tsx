@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams, useLocation } from 'react-router-dom'
 import { useDebounce } from 'use-debounce'
 import { useSearch } from '~/api/movie/use-search'
 import { MovieData } from '~/types/movie/movie-types'
@@ -30,6 +30,7 @@ export const useSearchContext = () => {
 
 const SearchProvider = ({ children }: { children: React.ReactNode }) => {
   const navigate = useNavigate()
+  const location = useLocation()
   const [isOpen, setIsOpen] = useState(false)
   const [results, setResults] = useState<MovieData | null>(null)
   const [searchKeyword, setSearchKeyword] = useState('')
@@ -38,6 +39,11 @@ const SearchProvider = ({ children }: { children: React.ReactNode }) => {
   const [, setSearchParams] = useSearchParams()
 
   const searchBarRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    onClear()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location.pathname])
 
   const { data } = useSearch(debouncedSearchKeyword)
 
@@ -64,6 +70,7 @@ const SearchProvider = ({ children }: { children: React.ReactNode }) => {
   const onClear = useCallback(() => {
     setSearchKeyword('')
     setResults(null)
+    setIsOpen(false)
   }, [setSearchKeyword, setResults])
 
   const onSearch = useCallback(

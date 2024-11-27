@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+import React from 'react'
 import { RouterProvider } from 'react-router-dom'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from '~/config/query-client'
@@ -6,13 +8,14 @@ import AppLayout from '~/components/layout/AppLayout'
 import MovieLayout from '~/components/layout/MovieLayout'
 import SearchProvider from '~/context/SearchProvider'
 import ModalProvider from '~/context/ModalProvider'
-import React from 'react'
 import Loading from '~/components/Loading'
 
 const RootLayout = () => (
   <SearchProvider>
     <ModalProvider>
-      <Outlet />
+      <Suspense fallback={<Loading />}>
+        <Outlet />
+      </Suspense>
     </ModalProvider>
   </SearchProvider>
 )
@@ -31,11 +34,19 @@ const App = () => {
       element: <RootLayout />,
       children: [
         {
-          element: <AppLayout />,
+          element: (
+            <Suspense fallback={<Loading />}>
+              <AppLayout />
+            </Suspense>
+          ),
           children: [
             {
               path: '/',
-              element: <Home />
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <Home />
+                </Suspense>
+              )
             },
             {
               path: 'list',
@@ -43,56 +54,55 @@ const App = () => {
                 {
                   path: ':type',
                   element: (
-                    <React.Suspense fallback={<Loading />}>
+                    <Suspense fallback={<Loading />}>
                       <MovieList />
-                    </React.Suspense>
-                  ),
-                  children: [{ path: '*', element: <MovieList /> }]
+                    </Suspense>
+                  )
                 }
               ]
             },
             {
               path: 'chi-tiet/:movieSlug',
-              element: <MovieLayout />,
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <MovieLayout />
+                </Suspense>
+              ),
               children: [
                 {
                   index: true,
-                  element: (
-                    <React.Suspense fallback={<Loading />}>
-                      <MovieDetail />
-                    </React.Suspense>
-                  )
+                  element: <MovieDetail />
                 }
               ]
             },
             {
               path: 'xem-phim/:movieSlug',
-              element: <MovieLayout />,
+              element: (
+                <Suspense fallback={<Loading />}>
+                  <MovieLayout />
+                </Suspense>
+              ),
               children: [
                 {
                   index: true,
-                  element: (
-                    <React.Suspense fallback={<Loading />}>
-                      <StreamingBasic />
-                    </React.Suspense>
-                  )
+                  element: <StreamingBasic />
                 }
               ]
             },
             {
               path: 'tim-kiem',
               element: (
-                <React.Suspense fallback={<Loading />}>
+                <Suspense fallback={<Loading />}>
                   <SearchList />
-                </React.Suspense>
+                </Suspense>
               )
             },
             {
               path: ':filterType/:filter',
               element: (
-                <React.Suspense fallback={<Loading />}>
+                <Suspense fallback={<Loading />}>
                   <MovieFilter />
-                </React.Suspense>
+                </Suspense>
               )
             }
           ]

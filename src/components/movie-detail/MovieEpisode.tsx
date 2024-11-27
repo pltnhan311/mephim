@@ -1,3 +1,4 @@
+import { useTransition } from 'react'
 import { faList } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useNavigate } from 'react-router-dom'
@@ -11,7 +12,15 @@ interface MovieEpisodeProps {
 
 const MovieEpisode: React.FC<MovieEpisodeProps> = ({ movieData, activeEpisode, setActiveEpisode }) => {
   const navigate = useNavigate()
+  const [isPending, startTransition] = useTransition()
   const episodes = movieData?.episodes?.[0]?.server_data
+
+  const handleEpisodeClick = (episode: string) => {
+    startTransition(() => {
+      setActiveEpisode(episode)
+      navigate(`/xem-phim/${movieData.slug}`)
+    })
+  }
 
   return (
     <div className='my-6'>
@@ -27,11 +36,9 @@ const MovieEpisode: React.FC<MovieEpisodeProps> = ({ movieData, activeEpisode, s
             key={episode.slug}
             className={`w-9 h-9 bg-gray-700 rounded-md flex items-center justify-center text-sm font-semibold transition-colors duration-200 ease-in-out hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-opacity-50 ${
               activeEpisode === episode.name ? '!bg-yellow-600 hover:!bg-yellow-700' : ''
-            }`}
-            onClick={() => {
-              setActiveEpisode(episode.name)
-              navigate(`/xem-phim/${movieData.slug}`)
-            }}
+            } ${isPending ? 'opacity-50 cursor-not-allowed' : ''}`}
+            onClick={() => handleEpisodeClick(episode.name)}
+            disabled={isPending}
           >
             {episode.name}
           </button>
