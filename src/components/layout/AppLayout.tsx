@@ -35,11 +35,10 @@ const AppLayout = () => {
               NẾU KHÔNG TẢI ĐƯỢC NỘI DUNG, HÃY BẤM F5 HOẶC TẢI LẠI TRANG 1 HOẶC 2 LẦN BẠN NHÉ .
             </p>
           </div>
-
           <Outlet />
         </div>
+        <Footer />
       </div>
-      <Footer />
     </div>
   )
 }
