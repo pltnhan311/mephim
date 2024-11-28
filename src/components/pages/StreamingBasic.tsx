@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import React, { useCallback, useState, useEffect } from 'react'
+import { Link, useParams, useNavigate } from 'react-router-dom'
 import ReactPlayer from 'react-player'
 import { useMovie } from '~/api/movie/use-movie'
 import Breadcrumb from '~/components/Breadcrumb'
@@ -134,19 +134,50 @@ const MovieInfoWithToggleableContent: React.FC<{
   </div>
 )
 
-const ErrorMessage: React.FC = () => (
-  <div className='flex flex-col items-center justify-center bg-container'>
-    <div className='text-4xl text-yellow-500 mb-4'>
-      <FontAwesomeIcon icon={faExclamationTriangle} />
+const ErrorMessage: React.FC = () => {
+  const navigate = useNavigate()
+  const [countdown, setCountdown] = useState(5)
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCountdown((prev) => prev - 1)
+    }, 1000)
+
+    const redirect = setTimeout(() => {
+      navigate('/')
+    }, 5000)
+
+    return () => {
+      clearInterval(timer)
+      clearTimeout(redirect)
+    }
+  }, [navigate])
+
+  return (
+    <div className='fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50'>
+      <div className='bg-container p-8 rounded-lg shadow-xl max-w-md w-full mx-4 animate-fadeIn'>
+        <div className='text-4xl text-yellow-500 mb-4 flex justify-center'>
+          <FontAwesomeIcon icon={faExclamationTriangle} className='animate-bounce' />
+        </div>
+        <h2 className='text-2xl font-bold text-yellow-500 mb-2 text-center'>
+          Rất tiếc, phim này hiện chưa có link xem 😭
+        </h2>
+        <p className='text-gray-400 mb-6 text-center'>Mong bạn thông cảm. Đang chuyển về trang chủ...</p>
+        <div className='flex justify-center mb-4'>
+          <div className='w-16 h-16 rounded-full border-4 border-yellow-500 flex items-center justify-center'>
+            <span className='text-2xl font-bold text-yellow-500'>{countdown}</span>
+          </div>
+        </div>
+        <div className='flex justify-center'>
+          <Link to='/'>
+            <button className='px-6 py-2 bg-yellow-500 text-black font-medium rounded-lg hover:bg-yellow-400 transition duration-300'>
+              Về trang chủ ngay
+            </button>
+          </Link>
+        </div>
+      </div>
     </div>
-    <h2 className='text-2xl font-bold text-yellow-500 mb-2'>Rất tiếc, phim này hiện chưa có link xem 😭</h2>
-    <p className='text-gray-400 mb-4'>Mong bạn thông cảm. Mời bạn xem phim khác.</p>
-    <Link to='/'>
-      <button className='px-4 py-2 bg-gray-600/50 rounded hover:bg-gray-600/70 transition duration-300'>
-        Xem phim khác
-      </button>
-    </Link>
-  </div>
-)
+  )
+}
 
 export default React.memo(StreamingBasic)
